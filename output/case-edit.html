@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>编辑受助人 - 公益补贴管理系统</title>
+  <link rel="stylesheet" href="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.css">
+  <style>
+    :root {
+      --td-brand-color: #ED3142;
+      --td-brand-color-hover: #d42a3a;
+      --td-brand-color-active: #c4202f;
+      --td-brand-color-light: rgba(237, 49, 66, 0.1);
+      --bg: #F3F3F3;
+      --card: #FFFFFF;
+      --border: #E7E7E7;
+      --input-border: #DCDCDC;
+      --text: rgba(0, 0, 0, 0.9);
+      --secondary: rgba(0, 0, 0, 0.6);
+      --placeholder: rgba(0, 0, 0, 0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-width: 1440px;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .top-nav { position: fixed; top: 0; left: 0; width: 1440px; height: 64px; z-index: 1000; }
+    .top-nav img { width: 1440px; height: 64px; display: block; }
+
+    .sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      bottom: 0;
+      width: 232px;
+      background: #fff;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+      overflow-y: auto;
+      padding: 8px 0;
+      z-index: 500;
+    }
+
+    .sidebar-group-title { font-size: 12px; color: rgba(91, 80, 80, 0.4); padding: 16px 16px 4px; line-height: 1; }
+    .sidebar-menu-item { display: flex; align-items: center; gap: 8px; padding: 10px 16px; margin: 2px 8px; border-radius: 3px; color: #5B5050; font-size: 14px; text-decoration: none; cursor: pointer; transition: background .2s; }
+    .sidebar-menu-item:hover { color: var(--td-brand-color); background: var(--td-brand-color-light); }
+    .sidebar-menu-item:hover svg path, .sidebar-menu-item:hover svg rect, .sidebar-menu-item:hover svg circle { stroke: var(--td-brand-color); }
+    .sidebar-menu-item.active { color: var(--td-brand-color); background: var(--td-brand-color-light); }
+    .sidebar-menu-item.active svg path, .sidebar-menu-item.active svg rect, .sidebar-menu-item.active svg circle { stroke: var(--td-brand-color); }
+    .sidebar-menu-item span { flex: 1; }
+
+    .main-content {
+      margin-left: 232px;
+      margin-top: 64px;
+      padding: 24px;
+      min-height: calc(100vh - 64px);
+      background: var(--bg);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 22px;
+      margin-bottom: 16px;
+      color: var(--placeholder);
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    .breadcrumb-current { color: var(--text); font-weight: 600; }
+
+    .content-card {
+      width: 1160px;
+      min-height: 760px;
+      background: var(--card);
+      border-radius: 6px;
+      box-shadow: 0 2px 1.5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .form-shell {
+      width: 832px;
+      margin: 0 auto;
+      padding: 32px 0 104px;
+    }
+
+    .page-title {
+      color: var(--text);
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .form-section { margin-bottom: 40px; }
+    .form-section:last-child { margin-bottom: 0; }
+
+    .form-section-title {
+      color: var(--text);
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 24px;
+      column-gap: 32px;
+    }
+
+    .form-item.full { grid-column: 1 / -1; }
+
+    .form-label {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .required { color: #D54941; margin-right: 2px; }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      border: 1px solid var(--input-border);
+      border-radius: 3px;
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 22px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      font-family: inherit;
+    }
+
+    .form-input,
+    .form-select { height: 32px; padding: 5px 8px; }
+    .form-textarea { min-height: 120px; padding: 5px 8px; resize: vertical; }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--placeholder); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--td-brand-color); box-shadow: 0 0 0 2px rgba(237, 49, 66, 0.08); }
+
+    .readonly-input { background: #F7F7F7; color: var(--secondary); }
+    .field-hint { margin-left: 8px; color: var(--placeholder); font-size: 12px; }
+
+    .footer-bar {
+      position: fixed;
+      right: 24px;
+      bottom: 0;
+      left: 256px;
+      width: 1160px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 0 32px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+      z-index: 900;
+    }
+
+    .btn {
+      height: 32px;
+      min-width: 72px;
+      padding: 0 16px;
+      border-radius: 3px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .btn.cancel { border: 1px solid #DCDCDC; background: #fff; color: var(--text); }
+    .btn.primary { border: 1px solid var(--td-brand-color); background: var(--td-brand-color); color: #fff; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="top-nav">
+      <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/header-bar.png" alt="腾讯公益 · 机构服务平台">
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-group-title">数字化执行工具</div>
+      <a class="sidebar-menu-item" href="dashboard.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2.5L2.5 8.75V17.5H7.5V12.5H12.5V17.5H17.5V8.75L10 2.5Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>首页</span>
+      </a>
+      <a class="sidebar-menu-item" href="batch-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M6 7H14M6 10H14M6 13H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>资助批次管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 17V7L10 3L17 7V17H3Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><rect x="8" y="11" width="4" height="6" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="8" r="1.5" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>学校管理</span>
+      </a>
+      <a class="sidebar-menu-item active" href="case-detail.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M4 17C4 14 6.5 12 10 12C13.5 12 16 14 16 17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>受益人管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="disbursement-wechat.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="4" width="15" height="12" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M2.5 8H17.5" stroke="#5B5050" stroke-width="1.5"/><path d="M6 12H9" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>微信拨付</span>
+      </a>
+      <a class="sidebar-menu-item" href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 8L10 4L17 8" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 8V15H16V8" stroke="#5B5050" stroke-width="1.5"/><path d="M3 15H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/><path d="M7 8V15M10 8V15M13 8V15" stroke="#5B5050" stroke-width="1.5"/></svg><span>银行拨付</span></a>
+      <a class="sidebar-menu-item" href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 17V10L7 12L10 6L13 9L17 3" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg><span>统计分析</span></a>
+      <a class="sidebar-menu-item" href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#5B5050" stroke-width="1.5"/><path d="M7 6H13M7 9H13M7 12H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg><span>拨付台账</span></a>
+      <a class="sidebar-menu-item" href="project-management.html"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5.5C3 4.67 3.67 4 4.5 4H8L10 6H15.5C16.33 6 17 6.67 17 7.5V14.5C17 15.33 16.33 16 15.5 16H4.5C3.67 16 3 15.33 3 14.5V5.5Z" stroke="#5B5050" stroke-width="1.5"/></svg><span>项目管理</span></a>
+      <a class="sidebar-menu-item" href="merchant-management.html"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M3 7H17" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="12" r="2" stroke="#5B5050" stroke-width="1.5"/></svg><span>商户号托管</span></a>
+      <a class="sidebar-menu-item" href="#"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><circle cx="14" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M3 17C3 14.5 5 13 8 13M12 17C12 14.5 14 13 14 13" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg><span>人员权限管理</span></a>
+    </aside>
+
+    <main class="main-content">
+      <div class="breadcrumb">
+        <span>受助人管理</span>
+        <span>/</span>
+        <span>受助人详情</span>
+        <span>/</span>
+        <span class="breadcrumb-current">编辑受助人</span>
+      </div>
+
+      <section class="content-card">
+        <div class="form-shell">
+          <h1 class="page-title">编辑受助人</h1>
+
+          <section class="form-section">
+            <h2 class="form-section-title">项目信息</h2>
+            <div class="form-grid">
+              <label class="form-item"><span class="form-label">项目名称</span><input class="form-input readonly-input" value="春蕾计划助学项目-大学" readonly></label>
+              <label class="form-item"><span class="form-label">资助标准</span><input class="form-input readonly-input" value="2000元/年" readonly></label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2 class="form-section-title">基本信息</h2>
+            <div class="form-grid">
+              <label class="form-item"><span class="form-label"><span class="required">*</span>姓名</span><input class="form-input" value="梧桐"></label>
+              <label class="form-item"><span class="form-label">性别<span class="field-hint">(身份证自动识别)</span></span><select class="form-select"><option selected>女</option><option>男</option></select></label>
+              <label class="form-item"><span class="form-label">出生日期<span class="field-hint">(身份证自动识别)</span></span><input class="form-input readonly-input" value="2008-02-27" readonly></label>
+              <label class="form-item"><span class="form-label">年龄<span class="field-hint">(身份证自动识别)</span></span><input class="form-input readonly-input" value="18岁" readonly></label>
+              <label class="form-item"><span class="form-label"><span class="required">*</span>身份证号</span><input class="form-input" value="430109200802270248"></label>
+              <label class="form-item"><span class="form-label">民族</span><input class="form-input" value="藏族"></label>
+              <label class="form-item"><span class="form-label"><span class="required">*</span>联系电话</span><input class="form-input" value="139598942012"></label>
+              <label class="form-item"><span class="form-label">银行支行</span><input class="form-input" placeholder="请输入银行支行"></label>
+              <label class="form-item"><span class="form-label">银行</span><input class="form-input" placeholder="请输入银行名称"></label>
+              <label class="form-item"><span class="form-label">银行卡号</span><input class="form-input" value="62228760335521081763"></label>
+              <label class="form-item"><span class="form-label">兴趣爱好</span><input class="form-input" placeholder="请输入兴趣爱好"></label>
+              <label class="form-item full"><span class="form-label"><span class="required">*</span>家庭住址</span><input class="form-input" value="湖南省长沙市开福区湘雅街道新村社区湘雅路674号"></label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2 class="form-section-title">教育信息</h2>
+            <div class="form-grid">
+              <label class="form-item"><span class="form-label"><span class="required">*</span>就读学校</span><input class="form-input" value="永州市第四中学"></label>
+              <label class="form-item"><span class="form-label"><span class="required">*</span>年级</span><input class="form-input" value="二年级"></label>
+              <label class="form-item"><span class="form-label">入学年份</span><input class="form-input" value="2024"></label>
+              <label class="form-item"><span class="form-label">学校手机号</span><input class="form-input" placeholder="请输入学校手机号"></label>
+              <label class="form-item full"><span class="form-label">学校地址</span><input class="form-input" placeholder="请输入学校地址"></label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2 class="form-section-title">补充说明</h2>
+            <div class="form-grid">
+              <label class="form-item full"><span class="form-label">家庭困难情况说明</span><textarea class="form-textarea">家庭经济困难，父母务农收入微薄，希望能够得到资助继续完成学业，未来回报社会。</textarea></label>
+              <label class="form-item full"><span class="form-label">志愿者走访建议</span><textarea class="form-textarea" placeholder="请输入志愿者走访建议">暂未填写</textarea></label>
+            </div>
+          </section>
+        </div>
+        <div class="footer-bar">
+          <a class="btn cancel" href="case-detail.html">取消</a>
+          <a class="btn primary" href="case-detail.html">保存</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

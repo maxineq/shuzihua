@@ -39,4 +39,20 @@ export const cases: CaseRegistration[] = [
     component: lazy(() => import('./dashboard/Page')),
     createdAt: '2026-05-27',
   },
+  {
+    caseId: 'beneficiary-detail',
+    displayName: '受助人详情',
+    description: '受助人详情页 - 信息分组、家访记录空态、附件材料、审核记录',
+    type: 'ui',
+    component: lazy(() => import('./beneficiary-detail/Page')),
+    createdAt: '2026-05-30',
+  },
+  {
+    caseId: 'beneficiary-edit',
+    displayName: '编辑受助人',
+    description: '受助人编辑页 - 按 Figma 表单排版组织当前详情字段',
+    type: 'ui',
+    component: lazy(() => import('./beneficiary-edit/Page')),
+    createdAt: '2026-05-30',
+  },
 ];

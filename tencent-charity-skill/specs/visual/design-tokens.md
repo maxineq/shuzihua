@@ -382,6 +382,7 @@ font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei"
 | 标签宽度 | ~140px，右对齐 |
 | 标签与输入框间距 | 16px |
 | 表单项垂直间距 | 24px |
+| 两列并列表单项横向间距 | 必须显式使用 `column-gap: 32px`，不要只写 `gap` |
 | 输入框宽度 | ~320px（中等）/ ~480px（较长） |
 | 下拉选择器 | 右侧下箭头图标，同输入框样式 |
 | 单选按钮 (Radio) | 圆形，选中态为品牌红 #ED3142 填充 |
@@ -437,6 +438,14 @@ font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei"
 | 背景色 | #FFFFFF |
 | 遮罩 | 左侧半透明暗色遮罩 rgba(0,0,0,0.4) |
 | 关闭按钮 | 右上角 × 图标 |
+
+### 抽屉表单布局
+| 属性 | 值 |
+|------|-----|
+| 两列并列表单项横向间距 | 必须显式使用 `column-gap: 32px`，不要只写 `gap` |
+| 表单项垂直间距 | `row-gap: 24px` |
+| 内容区内边距 | 32px |
+| 输入框高度 | 32px |
 
 ### 抽屉头部
 | 属性 | 值 |
