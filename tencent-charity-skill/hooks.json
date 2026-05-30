@@ -1,0 +1,28 @@
+{
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "script": "hooks/on-session-start.cjs",
+      "timeout": 30000,
+      "description": "会话启动时：检查环境、加载规范索引、输出欢迎信息"
+    },
+    {
+      "event": "UserPromptSubmit",
+      "script": "hooks/on-user-prompt-submit.cjs",
+      "timeout": 10000,
+      "description": "用户提交后：提取关键词、匹配技能、建议规范引用"
+    },
+    {
+      "event": "PostToolUse",
+      "script": "hooks/on-post-tool-use.cjs",
+      "timeout": 15000,
+      "description": "工具执行后：验证规范一致性、检查生成产物完整性"
+    },
+    {
+      "event": "Stop",
+      "script": "hooks/on-stop.cjs",
+      "timeout": 20000,
+      "description": "会话结束时：校验产物、记录指标、触发数据上报"
+    }
+  ]
+}

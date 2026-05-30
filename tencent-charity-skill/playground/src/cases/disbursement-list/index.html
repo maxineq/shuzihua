@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440">
+    <title>微信拨付管理 - 公益补贴管理系统</title>
+    <link rel="stylesheet" href="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.css">
+    <style>
+        :root {
+            --td-brand-color: #ED3142;
+            --td-brand-color-hover: #d42a3a;
+            --td-brand-color-active: #c4202f;
+            --td-brand-color-light: rgba(237, 49, 66, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #F3F3F3;
+            color: rgba(0,0,0,0.9);
+            min-height: 100vh;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1440px;
+            height: 64px;
+            z-index: 1000;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 232px;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            height: calc(100vh - 64px);
+            background: #FFFFFF;
+            z-index: 500;
+            overflow-y: auto;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+            padding: 8px 0;
+        }
+
+        .sidebar-group-title {
+            font-size: 12px;
+            color: rgba(91, 80, 80, 0.4);
+            padding: 16px 16px 4px 16px;
+            line-height: 1;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #5B5050;
+            text-decoration: none;
+            border-radius: 3px;
+            margin: 2px 8px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-menu-item:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .sidebar-menu-item.active {
+            color: #ED3142;
+            background: rgba(237, 49, 66, 0.1);
+        }
+
+        .sidebar-menu-item.active svg path,
+        .sidebar-menu-item.active svg rect,
+        .sidebar-menu-item.active svg circle {
+            stroke: #ED3142;
+        }
+
+        .sidebar-menu-item span {
+            flex: 1;
+        }
+
+        /* Content Area */
+        .content {
+            margin-left: 232px;
+            margin-top: 64px;
+            padding: 24px;
+            min-height: calc(100vh - 64px);
+        }
+
+        .content-card {
+            background: #FFFFFF;
+            border-radius: 6px;
+            padding: 32px;
+            box-shadow: 0px 2px 1.5px rgba(0,0,0,0.1);
+        }
+
+        /* Page Title */
+        .page-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(0,0,0,0.9);
+            margin-bottom: 32px;
+        }
+
+        .tab-section {
+            margin-bottom: 32px;
+        }
+
+        .page-title-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Filter Area */
+        .filter-area {
+            display: flex;
+            gap: 88px;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+        .filter-inputs {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .filter-inputs > * {
+            flex: 1;
+            min-width: 200px;
+        }
+        .filter-buttons {
+            flex-shrink: 0;
+            display: flex;
+            gap: 8px;
+        }
+        .btn-reset {
+            background: #E7E7E7 !important;
+            color: rgba(0,0,0,0.9) !important;
+            border: none !important;
+        }
+
+        .action-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        /* Table tweaks */
+        .progress-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .op-cell {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+
+        /* Status dot styles */
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .status-success { background: #00A870; }
+        .status-warning { background: #FF9C00; }
+        .status-error { background: #ED3142; }
+        .status-pending { background: #DCDCDC; }
+        .status-text-error { color: #ED3142; }
+        .status-text-success { color: rgba(0,0,0,0.9); }
+        .status-text-pending { color: rgba(0,0,0,0.6); }
+        .status-text-warning { color: rgba(0,0,0,0.9); }
+
+        /* TDesign Table overrides to match design spec */
+        .t-table__header th {
+            background: #F3F3F3 !important;
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            color: rgba(0,0,0,0.4) !important;
+            border-bottom: 1px solid #E7E7E7 !important;
+            padding: 16px !important;
+            height: auto !important;
+            line-height: 22px !important;
+        }
+        .t-table__body td {
+            font-size: 14px !important;
+            color: rgba(0,0,0,0.9) !important;
+            border-bottom: 1px solid #E7E7E7 !important;
+            padding: 16px !important;
+            line-height: 22px !important;
+        }
+        .t-table__row:hover td {
+            background: #F3F3F3 !important;
+        }
+        .t-table__row--stripe td {
+            background: transparent !important;
+        }
+        /* Operation links in table */
+        .t-link {
+            color: #0052D9 !important;
+            font-size: 14px !important;
+        }
+        /* Table operation links gap */
+        .table-ops, .op-cell {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        /* Pagination overrides */
+        .t-pagination__btn--current {
+            background: #ED3142 !important;
+            color: #FFFFFF !important;
+            border-color: #ED3142 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/header-bar.png" alt="腾讯公益 · 机构服务平台" style="width:1440px;height:64px;display:block;">
+    </div>
+
+    <div id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-group-title">数字化执行工具</div>
+            <a class="sidebar-menu-item" href="dashboard.html">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.5L2.5 8.75V17.5H7.5V12.5H12.5V17.5H17.5V8.75L10 2.5Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              <span>首页</span>
+            </a>
+            <a class="sidebar-menu-item" href="batch-management.html">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M6 7H14M6 10H14M6 13H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>资助批次管理</span>
+            </a>
+            <a class="sidebar-menu-item" href="#">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17V7L10 3L17 7V17H3Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><rect x="8" y="11" width="4" height="6" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="8" r="1.5" stroke="#5B5050" stroke-width="1.5"/></svg>
+              <span>学校管理</span>
+            </a>
+            <a class="sidebar-menu-item" href="student-management.html">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M4 17C4 14 6.5 12 10 12C13.5 12 16 14 16 17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>受益人管理</span>
+            </a>
+            <a class="sidebar-menu-item active" href="disbursement-wechat.html">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="4" width="15" height="12" rx="2" stroke="#ED3142" stroke-width="1.5"/><path d="M2.5 8H17.5" stroke="#ED3142" stroke-width="1.5"/><path d="M6 12H9" stroke="#ED3142" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>微信拨付</span>
+            </a>
+            <a class="sidebar-menu-item" href="#">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L10 4L17 8" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 8V15H16V8" stroke="#5B5050" stroke-width="1.5"/><path d="M3 15H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/><path d="M7 8V15M10 8V15M13 8V15" stroke="#5B5050" stroke-width="1.5"/></svg>
+              <span>银行拨付</span>
+            </a>
+            <a class="sidebar-menu-item" href="#">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17V10L7 12L10 6L13 9L17 3" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>统计分析</span>
+            </a>
+            <a class="sidebar-menu-item" href="#">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#5B5050" stroke-width="1.5"/><path d="M7 6H13M7 9H13M7 12H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>拨付台账</span>
+            </a>
+            <a class="sidebar-menu-item" href="project-management.html">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5C3 4.67 3.67 4 4.5 4H8L10 6H15.5C16.33 6 17 6.67 17 7.5V14.5C17 15.33 16.33 16 15.5 16H4.5C3.67 16 3 15.33 3 14.5V5.5Z" stroke="#5B5050" stroke-width="1.5"/></svg>
+              <span>项目管理</span>
+            </a>
+            <a class="sidebar-menu-item" href="merchant-management.html">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M3 7H17" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="12" r="2" stroke="#5B5050" stroke-width="1.5"/></svg>
+              <span>商户号托管</span>
+            </a>
+            <a class="sidebar-menu-item" href="#">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><circle cx="14" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M3 17C3 14.5 5 13 8 13M12 17C12 14.5 14 13 14 13" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>人员权限管理</span>
+            </a>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content">
+            <div class="content-card">
+                <!-- Page Title -->
+                <h1 class="page-title">微信拨付管理</h1>
+
+                <!-- Tabs -->
+                <div class="tab-section">
+                    <t-tabs v-model="activeTab">
+                        <t-tab-panel value="all" label="全部"></t-tab-panel>
+                        <t-tab-panel value="pending" label="待拨付"></t-tab-panel>
+                        <t-tab-panel value="processing" label="拨付中"></t-tab-panel>
+                        <t-tab-panel value="completed" label="已拨付"></t-tab-panel>
+                        <t-tab-panel value="records" label="查看拨付记录"></t-tab-panel>
+                    </t-tabs>
+                </div>
+
+                <!-- Filter Area -->
+                <div class="filter-area">
+                    <div class="filter-inputs">
+                        <t-input v-model="searchKeyword" placeholder="请输入拨付单编号或名称" clearable></t-input>
+                        <t-select v-model="batchFilter" placeholder="所属资助批次" clearable>
+                            <t-option value="2024autumn1" label="2024年秋季第一批"></t-option>
+                            <t-option value="2024autumn2" label="2024年秋季第二批"></t-option>
+                            <t-option value="2024spring3" label="2024年春季第三批"></t-option>
+                            <t-option value="2024spring2" label="2024年春季第二批"></t-option>
+                        </t-select>
+                        <t-select v-model="statusFilter" placeholder="拨付单状态" clearable>
+                            <t-option value="pending" label="待拨付"></t-option>
+                            <t-option value="processing" label="拨付中"></t-option>
+                            <t-option value="completed" label="已拨付"></t-option>
+                        </t-select>
+                    </div>
+                    <div class="filter-buttons">
+                        <t-button theme="primary" @click="onSearch">查询</t-button>
+                        <t-button class="btn-reset" @click="onReset">重置</t-button>
+                    </div>
+                </div>
+
+                <!-- Action Row -->
+                <div class="action-row">
+                    <t-button theme="primary">+ 新建微信拨付单</t-button>
+                    <t-button variant="outline">微信批量拨付</t-button>
+                    <t-button variant="outline">批量下载转账凭证</t-button>
+                    <t-button variant="outline">批量下载拨付单</t-button>
+                </div>
+
+                <!-- Table -->
+                <t-table
+                    :data="tableData"
+                    :columns="columns"
+                    row-key="id"
+                    :selected-row-keys="selectedRowKeys"
+                    @select-change="onSelectChange"
+                    hover
+                ></t-table>
+
+                <!-- Pagination -->
+                <div style="margin-top: 16px; display: flex; justify-content: flex-end;">
+                    <t-pagination
+                        v-model="currentPage"
+                        v-model:page-size="pageSize"
+                        :total="101"
+                        :page-size-options="[10, 20, 50]"
+                        show-jumper
+                    ></t-pagination>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.js"></script>
+  <script src="https://unpkg.com/tdesign-icons-vue-next/dist/index.min.js"></script>
+  <script>
+        const { createApp, ref, reactive, h } = Vue;
+
+        const app = createApp({
+            setup() {
+                // Tabs
+                const activeTab = ref('all');
+
+                // Filter
+                const searchKeyword = ref('');
+                const batchFilter = ref('');
+                const statusFilter = ref('');
+
+                const onSearch = () => {
+                    console.log('搜索:', searchKeyword.value, batchFilter.value, statusFilter.value);
+                };
+                const onReset = () => {
+                    searchKeyword.value = '';
+                    batchFilter.value = '';
+                    statusFilter.value = '';
+                };
+
+                // Table selection
+                const selectedRowKeys = ref([]);
+                const onSelectChange = (value) => {
+                    selectedRowKeys.value = value;
+                };
+
+                // Pagination
+                const currentPage = ref(1);
+                const pageSize = ref(10);
+
+                // Table columns
+                const columns = ref([
+                    { colKey: 'row-select', type: 'multiple', width: 50 },
+                    { colKey: 'id', title: '拨付单编号', width: 110 },
+                    { colKey: 'name', title: '拨付单名称', width: 160 },
+                    { colKey: 'batch', title: '所属资助批次', width: 140 },
+                    {
+                        colKey: 'status',
+                        title: '拨付状态',
+                        width: 100,
+                        cell: (h, { row }) => {
+                            const dotMap = { '已拨付': 'status-success', '拨付中': 'status-warning', '待拨付': 'status-pending' };
+                            const dotClass = dotMap[row.status] || 'status-pending';
+                            return h('span', { style: 'display:flex;align-items:center' }, [
+                                h('span', { class: 'status-dot ' + dotClass }),
+                                h('span', {}, row.status)
+                            ]);
+                        }
+                    },
+                    { colKey: 'totalBeneficiary', title: '总受益人数', width: 100 },
+                    { colKey: 'wechatCount', title: '支持微信转账人数', width: 140 },
+                    { colKey: 'estimatedAmount', title: '预计拨付(元)', width: 120 },
+                    { colKey: 'initiatedAmount', title: '已发起拨付(元)', width: 130 },
+                    { colKey: 'successAmount', title: '已成功拨付(元)', width: 130 },
+                    {
+                        colKey: 'progress',
+                        title: '已成功拨付进度',
+                        width: 150,
+                        cell: (h, { row }) => {
+                            return h('span', {}, row.progress + '%');
+                        }
+                    },
+                    { colKey: 'createTime', title: '创建时间', width: 150 },
+                    {
+                        colKey: 'operation',
+                        title: '操作',
+                        width: 260,
+                        fixed: 'right',
+                        cell: (h, { row }) => {
+                            return h('div', { class: 'op-cell' }, [
+                                h(TDesign.Link, { theme: 'primary' }, () => '微信拨付'),
+                                h(TDesign.Link, { theme: 'primary' }, () => '拨付记录'),
+                                h(TDesign.Link, { theme: 'primary' }, () => '更多')
+                            ]);
+                        }
+                    }
+                ]);
+
+                // Table data
+                const tableData = ref([
+                    { id: '100001', name: '张某某助学金张某某', batch: '2024年秋季第一批', status: '已拨付', totalBeneficiary: 156, wechatCount: 148, estimatedAmount: '89,400.00', initiatedAmount: '89,400.00', successAmount: '89,400.00', progress: 100, createTime: '2024-09-15 14:30' },
+                    { id: '100002', name: '张某某助学金张某某', batch: '2024年秋季第一批', status: '拨付中', totalBeneficiary: 203, wechatCount: 195, estimatedAmount: '121,800.00', initiatedAmount: '98,500.00', successAmount: '76,200.00', progress: 63, createTime: '2024-09-12 09:15' },
+                    { id: '100003', name: '张某某助学金张某某', batch: '2024年秋季第二批', status: '待拨付', totalBeneficiary: 89, wechatCount: 82, estimatedAmount: '53,400.00', initiatedAmount: '0.00', successAmount: '0.00', progress: 0, createTime: '2024-09-10 16:42' },
+                    { id: '100004', name: '张某某助学金张某某', batch: '2024年秋季第二批', status: '已拨付', totalBeneficiary: 312, wechatCount: 298, estimatedAmount: '187,200.00', initiatedAmount: '187,200.00', successAmount: '187,200.00', progress: 100, createTime: '2024-09-08 11:20' },
+                    { id: '100005', name: '张某某助学金张某某', batch: '2024年春季第三批', status: '拨付中', totalBeneficiary: 178, wechatCount: 165, estimatedAmount: '106,800.00', initiatedAmount: '85,200.00', successAmount: '62,400.00', progress: 58, createTime: '2024-09-05 08:45' },
+                    { id: '100006', name: '张某某助学金张某某', batch: '2024年春季第三批', status: '已拨付', totalBeneficiary: 245, wechatCount: 232, estimatedAmount: '146,400.00', initiatedAmount: '146,400.00', successAmount: '146,400.00', progress: 100, createTime: '2024-09-01 13:55' },
+                    { id: '100007', name: '张某某助学金张某某', batch: '2024年春季第二批', status: '待拨付', totalBeneficiary: 134, wechatCount: 126, estimatedAmount: '80,400.00', initiatedAmount: '0.00', successAmount: '0.00', progress: 0, createTime: '2024-08-28 10:30' }
+                ]);
+
+                return {
+                    activeTab,
+                    searchKeyword,
+                    batchFilter,
+                    statusFilter,
+                    onSearch,
+                    onReset,
+                    selectedRowKeys,
+                    onSelectChange,
+                    currentPage,
+                    pageSize,
+                    columns,
+                    tableData
+                };
+            }
+        });
+
+        app.use(TDesign);
+        if (typeof TDesignIcon !== "undefined") app.use(TDesignIcon);
+        app.mount('#app');
+    </script>
+</body>
+</html>

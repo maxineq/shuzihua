@@ -1,0 +1,17 @@
+{
+  "name": "tencent-charity-skill",
+  "version": "1.0.0",
+  "description": "腾讯公益机构平台 - AI 辅助设计系统（界面/交互/流程）",
+  "scripts": {
+    "start": "cd playground && npm install && npm run dev",
+    "dev": "cd playground && npm run dev",
+    "install:all": "cd playground && npm install",
+    "migrate": "node scripts/migrate.mjs",
+    "export": "node scripts/export.mjs",
+    "preflight": "node scripts/preflight.mjs",
+    "check:cases": "node scripts/check-cases.mjs"
+  },
+  "keywords": ["tencent", "charity", "design-skill", "prototype"],
+  "license": "UNLICENSED",
+  "private": true
+}

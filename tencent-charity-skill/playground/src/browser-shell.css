@@ -1,0 +1,50 @@
+/* ============================================================
+ * 浏览器外壳样式 - Playground 通用
+ * 所有案例预览必须使用此外壳
+ * ============================================================ */
+
+.browser-frame {
+  width: 1440px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1);
+  margin: 0 auto;
+}
+.browser-toolbar {
+  height: 40px;
+  background: #E8E8E8;
+  border-bottom: 1px solid #D0D0D0;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+.browser-dots { display: flex; gap: 6px; }
+.browser-dots span { width: 12px; height: 12px; border-radius: 50%; }
+.browser-dots .dot-red { background: #FF5F56; }
+.browser-dots .dot-yellow { background: #FFBD2E; }
+.browser-dots .dot-green { background: #27C93F; }
+.browser-address {
+  flex: 1;
+  height: 24px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  color: rgba(0,0,0,0.5);
+}
+.browser-address::before {
+  content: '\1F512';
+  margin-right: 6px;
+  font-size: 10px;
+}
+.browser-screen {
+  width: 1440px;
+  height: 900px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
