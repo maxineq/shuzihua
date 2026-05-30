@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>审批中心 - 公益补贴管理系统</title>
+  <link rel="stylesheet" href="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.css">
+  <style>
+    :root {
+      --td-brand-color: #ED3142;
+      --td-brand-color-hover: #d42a3a;
+      --td-brand-color-active: #c4202f;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 1440px;
+      height: 64px;
+      z-index: 1000;
+    }
+
+    .sidebar {
+      position: fixed; top: 64px; left: 0; bottom: 0; width: 232px;
+      background: #fff; box-shadow: 2px 0 4px rgba(0,0,0,0.05); overflow-y: auto; padding: 8px 0;
+    }
+
+    .sidebar-group-title {
+      font-size: 12px;
+      color: rgba(91, 80, 80, 0.4);
+      padding: 16px 16px 4px 16px;
+      line-height: 1;
+    }
+
+    .sidebar-menu-item {
+      display: flex; align-items: center; padding: 10px 16px; gap: 8px;
+      cursor: pointer; font-size: 14px; color: #5B5050; text-decoration: none;
+      border-radius: 3px; margin: 2px 8px; transition: background 0.2s;
+    }
+
+    .sidebar-menu-item:hover { background: rgba(0,0,0,0.04); }
+
+    .sidebar-menu-item.active {
+      color: #ED3142; background: rgba(237,49,66,0.1);
+    }
+
+    .sidebar-menu-item.active svg path,
+    .sidebar-menu-item.active svg rect,
+    .sidebar-menu-item.active svg circle { stroke: #ED3142; }
+
+    .sidebar-menu-item span { flex: 1; }
+
+    .main-content {
+      margin-left: 232px; margin-top: 64px; padding: 24px;
+      background: #F3F3F3; min-height: calc(100vh - 64px);
+    }
+
+    .content-card {
+      background: #FFFFFF;
+      border-radius: 6px;
+      padding: 32px;
+      box-shadow: 0px 2px 1.5px rgba(0,0,0,0.1);
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.9);
+      margin-bottom: 32px;
+    }
+
+    .tab-section {
+      margin-bottom: 32px;
+    }
+
+    .filter-area { display: flex; gap: 88px; align-items: flex-end; margin-bottom: 24px; }
+    .filter-inputs { flex: 1; display: flex; flex-wrap: wrap; gap: 24px; }
+    .filter-inputs > * { flex: 1; min-width: 200px; }
+    .filter-buttons { flex-shrink: 0; display: flex; gap: 8px; }
+    .btn-reset { background: #E7E7E7 !important; color: rgba(0,0,0,0.9) !important; border: none !important; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 16px; }
+    .card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+    .card-meta-item { font-size: 14px; color: #666; }
+    .card-meta-item label { color: #999; margin-right: 8px; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0f0f0; }
+
+    /* Override TDesign tag colors to match spec */
+    .t-tag--success { background: #E8F8EF !important; color: #00A870 !important; border: none !important; }
+    .t-tag--warning { background: #FFF3E0 !important; color: #FF9C00 !important; border: 1px solid #FF9C00 !important; }
+    .t-tag--danger { background: #FEF0F0 !important; color: #ED3142 !important; border: none !important; }
+    .t-tag--default { background: #FFFFFF !important; color: rgba(0,0,0,0.9) !important; border: 1px solid #DCDCDC !important; }
+    .t-tag { padding: 2px 8px; font-size: 12px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="top-nav">
+      <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/header-bar.png" alt="腾讯公益 · 机构服务平台" style="width:1440px;height:64px;display:block;">
+    </div>
+    <div class="sidebar">
+      <div class="sidebar-group-title">数字化执行工具</div>
+      <a class="sidebar-menu-item" href="dashboard.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.5L2.5 8.75V17.5H7.5V12.5H12.5V17.5H17.5V8.75L10 2.5Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>首页</span>
+      </a>
+      <a class="sidebar-menu-item" href="batch-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M6 7H14M6 10H14M6 13H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>资助批次管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17V7L10 3L17 7V17H3Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><rect x="8" y="11" width="4" height="6" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="8" r="1.5" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>学校管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="student-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M4 17C4 14 6.5 12 10 12C13.5 12 16 14 16 17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>受益人管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="disbursement-wechat.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="4" width="15" height="12" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M2.5 8H17.5" stroke="#5B5050" stroke-width="1.5"/><path d="M6 12H9" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>微信拨付</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L10 4L17 8" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 8V15H16V8" stroke="#5B5050" stroke-width="1.5"/><path d="M3 15H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/><path d="M7 8V15M10 8V15M13 8V15" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>银行拨付</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17V10L7 12L10 6L13 9L17 3" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>统计分析</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#5B5050" stroke-width="1.5"/><path d="M7 6H13M7 9H13M7 12H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>拨付台账</span>
+      </a>
+      <a class="sidebar-menu-item" href="project-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5C3 4.67 3.67 4 4.5 4H8L10 6H15.5C16.33 6 17 6.67 17 7.5V14.5C17 15.33 16.33 16 15.5 16H4.5C3.67 16 3 15.33 3 14.5V5.5Z" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>项目管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="merchant-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M3 7H17" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="12" r="2" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>商户号托管</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><circle cx="14" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M3 17C3 14.5 5 13 8 13M12 17C12 14.5 14 13 14 13" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>人员权限管理</span>
+      </a>
+    </div>
+    <div class="main-content">
+      <div class="content-card">
+        <h1 class="page-title">审批中心</h1>
+        <div class="tab-section">
+          <t-tabs :value="activeTab" @change="onTabChange">
+            <t-tab-panel value="pending" :label="'需我审批(3)'"></t-tab-panel>
+            <t-tab-panel value="approved" label="我已审批"></t-tab-panel>
+            <t-tab-panel value="initiated" label="我发起的"></t-tab-panel>
+          </t-tabs>
+        </div>
+        <div class="filter-area">
+          <div class="filter-inputs">
+            <t-select v-model="filterType" placeholder="审批类型" clearable>
+              <t-option value="all" label="全部类型"></t-option>
+              <t-option value="funding" label="拨付审批"></t-option>
+              <t-option value="project" label="项目审批"></t-option>
+              <t-option value="change" label="变更审批"></t-option>
+            </t-select>
+            <t-select v-model="filterStatus" placeholder="状态" clearable>
+              <t-option value="all" label="全部状态"></t-option>
+              <t-option value="pending" label="待审批"></t-option>
+              <t-option value="passed" label="已通过"></t-option>
+              <t-option value="rejected" label="已驳回"></t-option>
+            </t-select>
+          </div>
+          <div class="filter-buttons">
+            <t-button theme="primary" @click="handleSearch">查询</t-button>
+            <t-button class="btn-reset" @click="handleReset">重置</t-button>
+          </div>
+        </div>
+        <div class="cards-grid">
+          <t-card v-for="item in approvalList" :key="item.id" hover-shadow>
+            <template #header>
+              <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+                <span style="font-size:14px;font-weight:600;color:rgba(0,0,0,0.9);">{{ item.title }}</span>
+                <t-tag v-if="item.status === 'pending'" theme="warning">待审批</t-tag>
+                <t-tag v-else-if="item.status === 'passed'" theme="success">已通过</t-tag>
+                <t-tag v-else theme="danger">已驳回</t-tag>
+              </div>
+            </template>
+            <div class="card-meta">
+              <div class="card-meta-item"><label>发起人:</label>{{ item.initiator }}</div>
+              <div class="card-meta-item"><label>金额:</label>{{ item.amount }}</div>
+              <div class="card-meta-item"><label>发起时间:</label>{{ item.time }}</div>
+              <div class="card-meta-item"><label>审批类型:</label>{{ item.type }}</div>
+            </div>
+            <div class="card-footer">
+              <span></span>
+              <t-button v-if="item.status === 'pending'" theme="primary" size="small">审批</t-button>
+            </div>
+          </t-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- TDesign JS -->
+  <script src="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.js"></script>
+  <!-- TDesign Icons -->
+  <script src="https://unpkg.com/tdesign-icons-vue-next/dist/index.min.js"></script>
+  <script>
+    const { createApp, ref } = Vue;
+    const app = createApp({
+      setup() {
+        const activeTab = ref('pending');
+        const filterType = ref('');
+        const filterStatus = ref('');
+        const approvalList = ref([
+          { id: 1, title: '春季助学金拨付 - 批次01', initiator: '张三', amount: '¥85,000.00', time: '2026-05-20 14:30', type: '拨付审批', status: 'pending' },
+          { id: 2, title: '秋季助学金拨付 - 批次03', initiator: '李四', amount: '¥120,000.00', time: '2026-05-18 09:15', type: '拨付审批', status: 'pending' },
+          { id: 3, title: '特殊困难补助拨付 - 批次02', initiator: '王五', amount: '¥45,000.00', time: '2026-05-15 16:42', type: '拨付审批', status: 'pending' },
+          { id: 4, title: '血友病患者救助拨付 - 批次01', initiator: '赵六', amount: '¥200,000.00', time: '2026-05-10 11:20', type: '项目审批', status: 'passed' },
+        ]);
+        const onTabChange = (val) => { activeTab.value = val; };
+        const handleSearch = () => { console.log('查询', filterType.value, filterStatus.value); };
+        const handleReset = () => { filterType.value = ''; filterStatus.value = ''; };
+        return { activeTab, filterType, filterStatus, approvalList, onTabChange, handleSearch, handleReset };
+      }
+    });
+    app.use(TDesign);
+    if (typeof TDesignIcon !== 'undefined') app.use(TDesignIcon);
+    app.mount('#app');
+  </script>
+</body>
+</html>

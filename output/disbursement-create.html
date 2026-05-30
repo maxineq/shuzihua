@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新建拨付单 - 公益补贴管理系统</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tdesign-vue-next/dist/tdesign.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif; background: #F3F3F3; }
+
+    /* Top Nav */
+    .top-nav { position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 1000; }
+    .top-nav img { width: 100%; height: 64px; object-fit: cover; display: block; }
+
+    /* Sidebar */
+    .sidebar { position: fixed; top: 64px; left: 0; width: 232px; bottom: 0; background: #fff; box-shadow: 2px 0 4px rgba(0,0,0,0.05); overflow-y: auto; z-index: 999; padding: 8px 0; }
+    .sidebar-menu { padding: 0; }
+    .menu-item { display: flex; align-items: center; padding: 10px 16px; gap: 8px; font-size: 14px; color: #5B5050; cursor: pointer; transition: background 0.2s; text-decoration: none; border-radius: 3px; margin: 2px 8px; }
+    .menu-item:hover { background: rgba(0,0,0,0.04); }
+    .menu-item.active { background: rgba(237,49,66,0.1); color: #ED3142; }
+    .menu-item.active svg path, .menu-item.active svg rect, .menu-item.active svg circle { stroke: #ED3142; }
+    .menu-group-title { padding: 16px 16px 4px; font-size: 12px; color: rgba(91,80,80,0.4); }
+
+    /* Main Content */
+    .main-content { margin-left: 232px; margin-top: 64px; padding: 0 24px 24px; min-height: calc(100vh - 64px); background: #F3F3F3; }
+
+    /* Breadcrumb */
+    .breadcrumb { padding-top: 24px; padding-bottom: 8px; display: flex; align-items: center; gap: 4px; font-size: 14px; }
+    .breadcrumb a { color: rgba(0,0,0,0.4); text-decoration: none; }
+    .breadcrumb a:hover { color: rgba(0,0,0,0.6); }
+    .breadcrumb .separator { color: rgba(0,0,0,0.4); margin: 0 4px; }
+    .breadcrumb .current { color: rgba(0,0,0,0.9); font-weight: 600; }
+
+    /* Two Column Layout */
+    .content-wrapper { display: flex; gap: 0; margin-top: 8px; background: #fff; border-radius: 6px; box-shadow: 0px 2px 1.5px rgba(0,0,0,0.1); overflow: hidden; }
+    .left-column { flex: 1; padding: 32px; min-width: 0; }
+    .right-column { flex: 1; background: #F8F8F8; padding: 32px; border-left: 1px solid #E7E7E7; }
+
+    /* Page Title */
+    .page-title { font-size: 20px; font-weight: 600; color: rgba(0,0,0,0.9); margin-bottom: 32px; }
+
+    /* Section Title */
+    .section-title { font-size: 16px; font-weight: 600; color: rgba(0,0,0,0.9); margin-bottom: 24px; }
+
+    /* Form */
+    .form-fields { display: flex; flex-direction: column; gap: 24px; }
+    .form-item { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-size: 14px; color: rgba(0,0,0,0.9); }
+    .form-label .required { color: #ED3142; margin-right: 4px; }
+    .form-help { font-size: 12px; color: rgba(0,0,0,0.4); margin-top: 4px; }
+
+    /* Filter Area */
+    .filter-area { display: flex; align-items: flex-end; gap: 88px; margin-bottom: 16px; }
+    .filter-inputs { display: flex; gap: 16px; flex: 1; }
+    .filter-input-item { display: flex; flex-direction: column; gap: 8px; min-width: 200px; }
+    .filter-input-label { font-size: 14px; color: rgba(0,0,0,0.9); }
+    .filter-buttons { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn-reset { background: #E7E7E7; border: none; color: rgba(0,0,0,0.9); padding: 0 16px; height: 32px; border-radius: 3px; cursor: pointer; font-size: 14px; }
+    .btn-reset:hover { background: #D9D9D9; }
+
+    /* Checkbox row */
+    .checkbox-row { margin-bottom: 16px; }
+
+    /* Table */
+    .table-wrapper { margin-top: 16px; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .data-table thead th { background: #F3F3F3; padding: 12px 16px; text-align: left; font-weight: 500; color: rgba(0,0,0,0.9); border-bottom: 1px solid #E7E7E7; white-space: nowrap; }
+    .data-table tbody td { padding: 12px 16px; border-bottom: 1px solid #E7E7E7; color: rgba(0,0,0,0.9); }
+    .data-table tbody tr:hover { background: #F9F9F9; }
+
+    /* Tags */
+    .tag-certified { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; border: 1px solid #0052D9; color: #0052D9; background: transparent; }
+    .tag-uncertified { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; border: 1px solid #ED3142; color: #ED3142; background: transparent; }
+
+    /* Pagination */
+    .pagination-wrapper { display: flex; justify-content: flex-end; align-items: center; padding: 16px 0; gap: 8px; font-size: 14px; color: rgba(0,0,0,0.6); }
+    .pagination-wrapper .total { margin-right: auto; }
+
+    /* Right Panel */
+    .panel-title { font-size: 16px; font-weight: 600; color: rgba(0,0,0,0.9); margin-bottom: 16px; }
+    .panel-subtitle { font-size: 14px; font-weight: 600; color: rgba(0,0,0,0.9); margin-bottom: 24px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-label { font-size: 12px; color: rgba(0,0,0,0.4); }
+    .stat-value { font-size: 16px; font-weight: 600; color: rgba(0,0,0,0.9); }
+    .selected-section-title { font-size: 14px; font-weight: 600; color: rgba(0,0,0,0.9); margin-top: 24px; margin-bottom: 16px; }
+
+    /* Right table */
+    .right-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .right-table thead th { background: #F3F3F3; padding: 8px 8px; text-align: left; font-weight: 500; color: rgba(0,0,0,0.9); border-bottom: 1px solid #E7E7E7; white-space: nowrap; }
+    .right-table tbody td { padding: 8px 8px; border-bottom: 1px solid #E7E7E7; color: rgba(0,0,0,0.9); }
+    .right-table tbody tr:hover { background: #EFEFEF; }
+
+    .right-pagination { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 12px; color: rgba(0,0,0,0.6); }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/header-bar.png" alt="header">
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-menu">
+        <div class="menu-group-title">补贴管理</div>
+        <a class="menu-item" href="project-management.html">项目管理</a>
+        <a class="menu-item" href="batch-management.html">资助批次管理</a>
+        <a class="menu-item" href="student-management.html">受益人管理</a>
+        <div class="menu-group-title">拨付管理</div>
+        <a class="menu-item active" href="disbursement-wechat.html">微信拨付</a>
+        <a class="menu-item" href="merchant-management.html">商户管理</a>
+        <div class="menu-group-title">系统管理</div>
+        <a class="menu-item" href="approval-center.html">审批中心</a>
+        <a class="menu-item" href="funding-config.html">资金配置</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="disbursement-wechat.html">拨付管理</a>
+        <span class="separator">/</span>
+        <span class="current">新建拨付单</span>
+      </div>
+
+      <!-- Two Column Content -->
+      <div class="content-wrapper">
+        <!-- Left Column - Form -->
+        <div class="left-column">
+          <h1 class="page-title">新建拨付单</h1>
+          <h2 class="section-title">选择受益人</h2>
+
+          <div class="form-fields">
+            <!-- 名称 -->
+            <div class="form-item">
+              <label class="form-label"><span class="required">*</span>名称</label>
+              <t-input v-model="formData.name" maxlength="30" :suffix="formData.name.length + '/30'" placeholder="请输入名称"></t-input>
+            </div>
+
+            <!-- 选择资助批次 -->
+            <div class="form-item">
+              <label class="form-label"><span class="required">*</span>选择资助批次</label>
+              <t-select v-model="formData.batch" placeholder="请选择资助批次" :options="batchOptions"></t-select>
+              <span class="form-help">将根据资助批次展示受益人，一个拨付单仅能选择一个批次内的受益人</span>
+            </div>
+
+            <!-- 选择受益人 -->
+            <div class="form-item">
+              <label class="form-label"><span class="required">*</span>选择受益人</label>
+
+              <!-- Filter -->
+              <div class="filter-area">
+                <div class="filter-inputs">
+                  <div class="filter-input-item">
+                    <t-select v-model="filter.school" placeholder="选择学校" :options="schoolOptions" clearable></t-select>
+                  </div>
+                  <div class="filter-input-item">
+                    <t-select v-model="filter.region" placeholder="选择省市区县" :options="regionOptions" clearable></t-select>
+                  </div>
+                </div>
+                <div class="filter-buttons">
+                  <t-button theme="primary" @click="handleSearch">查询</t-button>
+                  <button class="btn-reset" @click="handleReset">重置</button>
+                </div>
+              </div>
+
+              <!-- Checkbox -->
+              <div class="checkbox-row">
+                <t-checkbox v-model="selectAll">选择已筛选出的所有可接受筹款受益人（100人）</t-checkbox>
+              </div>
+
+              <!-- Table -->
+              <div class="table-wrapper">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width:40px"><t-checkbox v-model="checkAll" @change="handleCheckAll"></t-checkbox></th>
+                      <th>姓名</th>
+                      <th>身份证号</th>
+                      <th>认证状态</th>
+                      <th>预拨付金额(元)</th>
+                      <th>所属学校</th>
+                      <th>所在地区</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(row, index) in tableData" :key="index">
+                      <td><t-checkbox v-model="row.checked"></t-checkbox></td>
+                      <td>{{ row.name }}</td>
+                      <td>{{ row.idCard }}</td>
+                      <td>
+                        <span :class="row.certStatus === '未认证' ? 'tag-uncertified' : 'tag-certified'">{{ row.certStatus }}</span>
+                      </td>
+                      <td>{{ row.amount }}</td>
+                      <td>{{ row.school }}</td>
+                      <td>{{ row.region }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="pagination-wrapper">
+                  <span class="total">共 100 项数据</span>
+                  <t-pagination :total="100" :page-size="10" :current="1" size="small" show-jumper></t-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - 预确认 Panel -->
+        <div class="right-column">
+          <div class="panel-title">预确认</div>
+          <div class="panel-subtitle">请仔细检查名单及其认证情况</div>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">已认证人数</span>
+              <span class="stat-value">—</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">未认证人数</span>
+              <span class="stat-value">—</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">预拨款总额</span>
+              <span class="stat-value">—</span>
+            </div>
+          </div>
+
+          <div class="selected-section-title">已选择受益人（0）</div>
+
+          <table class="right-table">
+            <thead>
+              <tr>
+                <th>姓名</th>
+                <th>身份证号</th>
+                <th>认证状态</th>
+                <th>预拨付金额(元)</th>
+                <th>所属学校</th>
+                <th>所在地区</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, index) in rightTableData" :key="index">
+                <td>{{ row.name }}</td>
+                <td>{{ row.idCard }}</td>
+                <td>
+                  <span :class="row.certStatus === '未认证' ? 'tag-uncertified' : 'tag-certified'">{{ row.certStatus }}</span>
+                </td>
+                <td>{{ row.amount }}</td>
+                <td>{{ row.school }}</td>
+                <td>{{ row.region }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="right-pagination">
+            <span>共101项数据</span>
+            <span>10条/页</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tdesign-vue-next/dist/tdesign.min.js"></script>
+  <script>
+    const { createApp, ref, reactive } = Vue;
+
+    const app = createApp({
+      setup() {
+        const formData = reactive({
+          name: '',
+          batch: ''
+        });
+
+        const filter = reactive({
+          school: '',
+          region: ''
+        });
+
+        const selectAll = ref(false);
+        const checkAll = ref(true);
+
+        const batchOptions = [
+          { label: '2024年春季资助批次', value: '1' },
+          { label: '2024年秋季资助批次', value: '2' }
+        ];
+
+        const schoolOptions = [
+          { label: '春光明天小学', value: '1' },
+          { label: '中关村二小', value: '2' },
+          { label: '西二旗小学', value: '3' }
+        ];
+
+        const regionOptions = [
+          { label: '河南省郑州市', value: '1' },
+          { label: '广西壮族自治区桂林市', value: '2' }
+        ];
+
+        const tableData = reactive([]);
+
+        const rightTableData = reactive([]);
+
+        const handleSearch = () => {
+          console.log('Search:', filter);
+        };
+
+        const handleReset = () => {
+          filter.school = '';
+          filter.region = '';
+        };
+
+        const handleCheckAll = (val) => {
+          tableData.forEach(row => { row.checked = val; });
+        };
+
+        return {
+          formData,
+          filter,
+          selectAll,
+          checkAll,
+          batchOptions,
+          schoolOptions,
+          regionOptions,
+          tableData,
+          rightTableData,
+          handleSearch,
+          handleReset,
+          handleCheckAll
+        };
+      }
+    });
+
+    app.use(TDesign);
+    app.mount('#app');
+  </script>
+</body>
+</html>

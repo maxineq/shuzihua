@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>公益补贴管理系统 - 登录</title>
+  <link rel="stylesheet" href="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.css">
+  <style>
+    :root {
+      --td-brand-color: #ED3142;
+      --td-brand-color-hover: #d42a3a;
+      --td-brand-color-active: #c1232d;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+      background: #E8E8E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    /* PC Browser Frame */
+    .browser-frame {
+      width: 1440px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    /* Browser top bar */
+    .browser-toolbar {
+      height: 40px;
+      background: #E8E8E8;
+      border-bottom: 1px solid #D0D0D0;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 8px;
+    }
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .browser-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .browser-dots .dot-red { background: #FF5F56; }
+    .browser-dots .dot-yellow { background: #FFBD2E; }
+    .browser-dots .dot-green { background: #27C93F; }
+    .browser-address {
+      flex: 1;
+      height: 24px;
+      background: #FFFFFF;
+      border-radius: 4px;
+      margin-left: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 12px;
+      color: rgba(0,0,0,0.5);
+    }
+    .browser-address::before {
+      content: '🔒';
+      margin-right: 6px;
+      font-size: 10px;
+    }
+
+    /* Screen content */
+    .browser-screen {
+      width: 1440px;
+      height: 900px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background */
+    .login-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .login-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+
+    /* Top header bar */
+    .login-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .login-header .platform-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.9);
+    }
+
+    /* Login card - glass morphism */
+    .login-card {
+      position: absolute;
+      top: 96px;
+      left: calc(31.25% + 22px);
+      width: 496px;
+      height: 592px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(15px);
+      z-index: 5;
+    }
+
+    /* Form area inside card */
+    .login-form {
+      position: absolute;
+      top: 144px;
+      left: calc(31.25% + 70px);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .login-title {
+      font-size: 36px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.9);
+      line-height: 44px;
+    }
+
+    /* Login method tabs */
+    .login-tabs {
+      display: flex;
+      gap: 32px;
+    }
+    .login-tab {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .login-tab span {
+      font-size: 16px;
+      line-height: 24px;
+      color: rgba(0,0,0,0.9);
+    }
+    .login-tab.active span {
+      color: #ED3142;
+    }
+    .login-tab .tab-line {
+      height: 2px;
+      width: 100%;
+      background: transparent;
+    }
+    .login-tab.active .tab-line {
+      background: #ED3142;
+    }
+
+    /* Input fields */
+    .form-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .input-field {
+      width: 400px;
+      height: 40px;
+      border: 1px solid #DCDCDC;
+      border-radius: 3px;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      gap: 8px;
+    }
+    .input-field .icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .input-field .icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .input-field input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      line-height: 24px;
+      color: rgba(0,0,0,0.9);
+      background: transparent;
+    }
+    .input-field input::placeholder {
+      color: rgba(0,0,0,0.4);
+    }
+
+    .code-row {
+      display: flex;
+      gap: 16px;
+    }
+    .code-row .input-field {
+      width: 256px;
+    }
+    .code-btn {
+      height: 40px;
+      padding: 8px 24px;
+      border: 1px solid #DCDCDC;
+      border-radius: 3px;
+      background: #FFFFFF;
+      font-size: 16px;
+      color: rgba(0,0,0,0.9);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .code-btn:hover {
+      border-color: #ED3142;
+      color: #ED3142;
+    }
+
+    /* Bottom area */
+    .login-bottom {
+      position: absolute;
+      top: 524px;
+      left: calc(31.25% + 70px);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 3px;
+      accent-color: #ED3142;
+    }
+    .checkbox-row span {
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(0,0,0,0.9);
+    }
+    .checkbox-row a {
+      color: #ED3142;
+      text-decoration: none;
+    }
+
+    .login-btn {
+      width: 400px;
+      height: 40px;
+      background: #ED3142;
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 8px;
+      font-size: 14px;
+    }
+    .footer-links .gray {
+      color: rgba(0,0,0,0.6);
+    }
+    .footer-links .dark {
+      color: rgba(0,0,0,0.9);
+      cursor: pointer;
+    }
+    .footer-links .dark:hover {
+      color: #ED3142;
+    }
+
+    /* Copyright */
+    .copyright {
+      position: absolute;
+      bottom: 75px;
+      left: 80px;
+      font-size: 14px;
+      color: rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="browser-frame">
+    <!-- Browser toolbar -->
+    <div class="browser-toolbar">
+      <div class="browser-dots">
+        <span class="dot-red"></span>
+        <span class="dot-yellow"></span>
+        <span class="dot-green"></span>
+      </div>
+      <div class="browser-address">charity-admin.tencent.com/login</div>
+    </div>
+
+    <!-- Screen content -->
+    <div class="browser-screen">
+      <!-- Background -->
+      <div class="login-bg">
+        <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/login-bg.png" alt="">
+      </div>
+
+  <!-- Header -->
+  <div class="login-header">
+    <span class="platform-name">公益补贴管理系统</span>
+  </div>
+
+  <!-- Glass card -->
+  <div class="login-card"></div>
+
+  <!-- Form -->
+  <div class="login-form">
+    <h1 class="login-title">欢迎登录</h1>
+
+    <div class="login-tabs">
+      <div class="login-tab active">
+        <span>短信登录</span>
+        <div class="tab-line"></div>
+      </div>
+      <div class="login-tab">
+        <span>微信登录</span>
+        <div class="tab-line"></div>
+      </div>
+      <div class="login-tab">
+        <span>QQ登录</span>
+        <div class="tab-line"></div>
+      </div>
+      <div class="login-tab">
+        <span>企业微信登录</span>
+        <div class="tab-line"></div>
+      </div>
+    </div>
+
+    <div class="form-fields">
+      <div class="input-field">
+        <div class="icon">
+          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="1" width="10" height="16" rx="2" stroke="rgba(0,0,0,0.4)" stroke-width="1.2"/>
+            <line x1="7" y1="15" x2="11" y2="15" stroke="rgba(0,0,0,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <input type="text" placeholder="请输入手机号">
+      </div>
+      <div class="code-row">
+        <div class="input-field">
+          <input type="text" placeholder="请输入验证码">
+        </div>
+        <button class="code-btn">发送验证码</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom (checkbox + button + links) -->
+  <div class="login-bottom">
+    <div class="checkbox-row">
+      <input type="checkbox" id="agree">
+      <span>阅读并同意<a href="#">《公益补贴管理系统服务协议》</a></span>
+    </div>
+    <button class="login-btn">登录</button>
+    <div class="footer-links">
+      <span class="gray">忘记密码了?</span>
+      <span class="dark">找回帐号</span>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">Copyright @ 2021-2024 Tencent. All Rights Reserved</div>
+
+    </div><!-- end browser-screen -->
+  </div><!-- end browser-frame -->
+</body>
+</html>

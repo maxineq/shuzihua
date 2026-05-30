@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商户号管理 - 公益补贴管理系统</title>
+  <link rel="stylesheet" href="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.css">
+  <style>
+    :root {
+      --td-brand-color: #ED3142;
+      --td-brand-color-hover: #d42a3a;
+      --td-brand-color-active: #c4202f;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 1440px;
+      height: 64px;
+      z-index: 1000;
+    }
+
+    .sidebar {
+      position: fixed; top: 64px; left: 0; bottom: 0; width: 232px;
+      background: #fff; box-shadow: 2px 0 4px rgba(0,0,0,0.05); overflow-y: auto; padding: 8px 0;
+    }
+
+    .sidebar-group-title {
+      font-size: 12px;
+      color: rgba(91, 80, 80, 0.4);
+      padding: 16px 16px 4px 16px;
+      line-height: 1;
+    }
+
+    .sidebar-menu-item {
+      display: flex; align-items: center; padding: 10px 16px; gap: 8px;
+      cursor: pointer; font-size: 14px; color: #5B5050; text-decoration: none;
+      border-radius: 3px; margin: 2px 8px; transition: background 0.2s;
+    }
+
+    .sidebar-menu-item:hover { background: rgba(0,0,0,0.04); }
+
+    .sidebar-menu-item.active {
+      color: #ED3142; background: rgba(237,49,66,0.1);
+    }
+
+    .sidebar-menu-item.active svg path,
+    .sidebar-menu-item.active svg rect,
+    .sidebar-menu-item.active svg circle { stroke: #ED3142; }
+
+    .sidebar-menu-item span { flex: 1; }
+
+    .main-content {
+      margin-left: 232px; margin-top: 64px; padding: 24px;
+      background: #F3F3F3; min-height: calc(100vh - 64px);
+    }
+
+    .content-card {
+      background: #FFFFFF;
+      border-radius: 6px;
+      padding: 32px;
+      box-shadow: 0px 2px 1.5px rgba(0,0,0,0.1);
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.9);
+      margin-bottom: 32px;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .alert-section { margin-top: 16px; }
+
+    /* Status dot styles */
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .status-success { background: #00A870; }
+    .status-warning { background: #FF9C00; }
+    .status-error { background: #ED3142; }
+    .status-pending { background: #DCDCDC; }
+    .status-text-error { color: #ED3142; }
+    .status-text-success { color: rgba(0,0,0,0.9); }
+    .status-text-pending { color: rgba(0,0,0,0.6); }
+    .status-text-warning { color: rgba(0,0,0,0.9); }
+
+    /* TDesign Table overrides to match design spec */
+    .t-table__header th {
+      background: #F3F3F3 !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      color: rgba(0,0,0,0.4) !important;
+      border-bottom: 1px solid #E7E7E7 !important;
+      padding: 16px !important;
+      height: auto !important;
+      line-height: 22px !important;
+    }
+    .t-table__body td {
+      font-size: 14px !important;
+      color: rgba(0,0,0,0.9) !important;
+      border-bottom: 1px solid #E7E7E7 !important;
+      padding: 16px !important;
+      line-height: 22px !important;
+    }
+    .t-table__row:hover td {
+      background: #F3F3F3 !important;
+    }
+    .t-table__row--stripe td {
+      background: transparent !important;
+    }
+    /* Operation links in table */
+    .t-link {
+      color: #0052D9 !important;
+      font-size: 14px !important;
+    }
+    /* Table operation links gap */
+    .table-ops, .op-cell {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    /* Pagination overrides */
+    .t-pagination__btn--current {
+      background: #ED3142 !important;
+      color: #FFFFFF !important;
+      border-color: #ED3142 !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="top-nav">
+      <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/header-bar.png" alt="腾讯公益 · 机构服务平台" style="width:1440px;height:64px;display:block;">
+    </div>
+    <div class="sidebar">
+      <div class="sidebar-group-title">数字化执行工具</div>
+      <a class="sidebar-menu-item" href="dashboard.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.5L2.5 8.75V17.5H7.5V12.5H12.5V17.5H17.5V8.75L10 2.5Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>首页</span>
+      </a>
+      <a class="sidebar-menu-item" href="batch-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M6 7H14M6 10H14M6 13H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>资助批次管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17V7L10 3L17 7V17H3Z" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><rect x="8" y="11" width="4" height="6" stroke="#5B5050" stroke-width="1.5"/><circle cx="10" cy="8" r="1.5" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>学校管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="student-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M4 17C4 14 6.5 12 10 12C13.5 12 16 14 16 17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>受益人管理</span>
+      </a>
+      <a class="sidebar-menu-item" href="disbursement-wechat.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="4" width="15" height="12" rx="2" stroke="#5B5050" stroke-width="1.5"/><path d="M2.5 8H17.5" stroke="#5B5050" stroke-width="1.5"/><path d="M6 12H9" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>微信拨付</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L10 4L17 8" stroke="#5B5050" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 8V15H16V8" stroke="#5B5050" stroke-width="1.5"/><path d="M3 15H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/><path d="M7 8V15M10 8V15M13 8V15" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>银行拨付</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17V10L7 12L10 6L13 9L17 3" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17H17" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>统计分析</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#5B5050" stroke-width="1.5"/><path d="M7 6H13M7 9H13M7 12H10" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>拨付台账</span>
+      </a>
+      <a class="sidebar-menu-item" href="project-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5.5C3 4.67 3.67 4 4.5 4H8L10 6H15.5C16.33 6 17 6.67 17 7.5V14.5C17 15.33 16.33 16 15.5 16H4.5C3.67 16 3 15.33 3 14.5V5.5Z" stroke="#5B5050" stroke-width="1.5"/></svg>
+        <span>项目管理</span>
+      </a>
+      <a class="sidebar-menu-item active" href="merchant-management.html">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#ED3142" stroke-width="1.5"/><path d="M3 7H17" stroke="#ED3142" stroke-width="1.5"/><circle cx="10" cy="12" r="2" stroke="#ED3142" stroke-width="1.5"/></svg>
+        <span>商户号托管</span>
+      </a>
+      <a class="sidebar-menu-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><circle cx="14" cy="7" r="3" stroke="#5B5050" stroke-width="1.5"/><path d="M3 17C3 14.5 5 13 8 13M12 17C12 14.5 14 13 14 13" stroke="#5B5050" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>人员权限管理</span>
+      </a>
+    </div>
+    <div class="main-content">
+      <div class="content-card">
+        <h1 class="page-title">商户号管理</h1>
+        <div class="action-row">
+          <t-button theme="primary"><template #icon><t-icon name="add"></t-icon></template>添加商户号</t-button>
+        </div>
+        <t-table :data="tableData" :columns="columns" row-key="id" hover>
+          <template #status="{ row }">
+            <span style="display:flex;align-items:center">
+              <span class="status-dot" :class="row.status === '正常' ? 'status-success' : row.status === '已冻结' ? 'status-error' : 'status-pending'"></span>
+              <span :class="row.status === '已冻结' ? 'status-text-error' : ''">{{ row.status }}</span>
+            </span>
+          </template>
+          <template #op="{ row }">
+            <t-link theme="primary" hover="color" style="margin-right: 12px;">查看</t-link>
+            <t-link theme="primary" hover="color" style="margin-right: 12px;">编辑</t-link>
+            <t-link theme="primary" hover="color">交易记录</t-link>
+          </template>
+        </t-table>
+      </div>
+      <div class="alert-section">
+        <t-alert theme="warning" title="安全提示" message="请定期检查商户号安全配置，确保API密钥未泄露。建议每季度更换一次API密钥，并开启异常交易告警通知。涉及大额拨付时，请确认商户号余额充足。"></t-alert>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.js"></script>
+  <script src="https://unpkg.com/tdesign-icons-vue-next/dist/index.min.js"></script>
+  <script>
+    const { createApp, ref } = Vue;
+    const app = createApp({
+      setup() {
+        const columns = ref([
+          { colKey: 'merchantNo', title: '商户号', width: 160 },
+          { colKey: 'merchantName', title: '商户名称', width: 180 },
+          { colKey: 'channel', title: '支付渠道', width: 120 },
+          { colKey: 'balance', title: '可用余额(元)', width: 140 },
+          { colKey: 'status', title: '状态', width: 100, cell: 'status' },
+          { colKey: 'lastTransaction', title: '最近交易时间', width: 180 },
+          { colKey: 'op', title: '操作', width: 200, cell: 'op' },
+        ]);
+        const tableData = ref([
+          { id: 1, merchantNo: '1900008761', merchantName: '腾讯公益慈善基金会', channel: '微信支付', balance: '1,256,800.00', status: '正常', lastTransaction: '2026-05-26 15:30:22' },
+          { id: 2, merchantNo: '1900008762', merchantName: '春蕾计划专项基金', channel: '微信支付', balance: '458,200.00', status: '正常', lastTransaction: '2026-05-25 09:12:45' },
+          { id: 3, merchantNo: '1900008763', merchantName: '血友病救助专项账户', channel: '银行转账', balance: '0.00', status: '已冻结', lastTransaction: '2026-04-18 14:05:33' },
+        ]);
+        return { columns, tableData };
+      }
+    });
+    app.use(TDesign);
+    if (typeof TDesignIcon !== "undefined") app.use(TDesignIcon);
+    app.mount('#app');
+  </script>
+</body>
+</html>
