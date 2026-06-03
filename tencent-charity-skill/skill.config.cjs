@@ -18,7 +18,7 @@ module.exports = {
   // ── CDN / 下载配置 ────────────────────────────────────────
   cdnDomain: 'ssv-design.ssv.tencent.com',
   cdnProtocol: 'https',
-  cdnPathPrefix: 'tencent-charity',
+  cdnPathPrefix: 'ai_afford',
 
   /** 本地目标目录（用户项目中存放 skill 文件的目录名） */
   localTargetDir: '.agents',
