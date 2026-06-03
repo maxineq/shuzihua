@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1440">
-  <title>梧桐 - 受助人详情</title>
+  <title>梧桐 - 审核详情</title>
   <link rel="stylesheet" href="https://unpkg.com/tdesign-vue-next/dist/tdesign.min.css">
   <style>
     :root {
@@ -163,6 +163,24 @@
       color: var(--success);
       font-size: 12px;
       line-height: 20px;
+    }
+
+    .status-tag--pending {
+      background: #FFF3E0;
+      color: #FF9C00;
+      border: 1px solid #FF9C00;
+    }
+
+    .status-tag--rejected {
+      background: #FEF0F0;
+      color: #ED3142;
+      border: none;
+    }
+
+    .status-tag--approved {
+      background: rgba(0, 168, 112, 0.1);
+      color: #00A870;
+      border: none;
     }
 
     .edit-btn {
@@ -759,6 +777,14 @@
 
     .tdesign-step-item.current .tdesign-step-title { color: var(--td-brand-color); }
 
+    .tdesign-step-item.rejected .tdesign-step-dot {
+      border-color: #ED3142;
+      background: #ED3142;
+      box-shadow: 0 0 0 3px rgba(237, 49, 66, 0.12);
+    }
+    .tdesign-step-item.rejected .tdesign-step-title { color: #ED3142; }
+    .tdesign-step-item.rejected .tdesign-step-desc { color: #ED3142; }
+
     .audit-step-time {
       color: var(--secondary);
       font-size: 14px;
@@ -771,6 +797,212 @@
       font-size: 14px;
       line-height: 22px;
       font-weight: 600;
+    }
+
+    /* 驳回弹窗 */
+    .reject-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+      z-index: 3000;
+    }
+    .reject-mask.open { opacity: 1; pointer-events: auto; }
+
+    .reject-dialog {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3001;
+      align-items: center;
+      justify-content: center;
+    }
+    .reject-dialog.open { display: flex; }
+
+    .reject-dialog__panel {
+      width: 480px;
+      max-width: 960px;
+      max-height: 740px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reject-dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reject-dialog__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 24px;
+    }
+
+    .reject-dialog__close {
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      color: #909CAA;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+    }
+    .reject-dialog__close:hover { background: #F3F3F3; color: var(--text); }
+
+    .reject-dialog__body { flex: 1; overflow-y: auto; padding: 24px; }
+
+    .reject-dialog__label {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 22px;
+      margin-bottom: 8px;
+    }
+
+    .reject-dialog__required { color: #D54941; }
+
+    .reject-dialog__textarea-wrap { position: relative; }
+
+    .reject-dialog__textarea {
+      width: 100%;
+      min-height: 104px;
+      padding: 8px;
+      padding-bottom: 24px;
+      border: 1px solid #DCDCDC;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 22px;
+      font-family: inherit;
+      color: var(--text);
+      resize: none;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      box-sizing: border-box;
+    }
+    .reject-dialog__textarea::placeholder { color: var(--placeholder); }
+    .reject-dialog__textarea:focus {
+      border-color: var(--td-brand-color);
+      box-shadow: 0 0 0 2px rgba(237, 49, 66, 0.08);
+    }
+    .reject-dialog__textarea.is-error { border-color: #ED3142; }
+
+    .reject-dialog__count {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      font-size: 12px;
+      color: var(--placeholder);
+      pointer-events: none;
+    }
+
+    .reject-dialog__hint {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #ED3142;
+      line-height: 18px;
+    }
+
+    .reject-dialog__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 0 24px 20px;
+    }
+
+    .reject-dialog__btn {
+      height: 32px;
+      min-width: 72px;
+      padding: 0 16px;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 22px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .reject-dialog__btn--cancel {
+      border: 1px solid #DCDCDC;
+      background: #fff;
+      color: var(--text);
+    }
+    .reject-dialog__btn--cancel:hover { background: #F3F3F3; }
+    .reject-dialog__btn--confirm {
+      border: 1px solid var(--td-brand-color);
+      background: var(--td-brand-color);
+      color: #fff;
+    }
+    .reject-dialog__btn--confirm:hover { background: var(--td-brand-color-hover); border-color: var(--td-brand-color-hover); }
+
+    /* 底部常驻审核操作栏 */
+    .audit-action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 1440px;
+      height: 64px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 0 32px;
+      z-index: 900;
+    }
+
+    .btn-reject {
+      height: 36px;
+      min-width: 88px;
+      padding: 0 20px;
+      border: 1px solid var(--td-brand-color);
+      border-radius: 3px;
+      background: #fff;
+      color: var(--td-brand-color);
+      font-size: 14px;
+      line-height: 22px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .btn-reject:hover {
+      background: rgba(237, 49, 66, 0.06);
+    }
+
+    .btn-approve {
+      height: 36px;
+      min-width: 88px;
+      padding: 0 20px;
+      border: 1px solid var(--td-brand-color);
+      border-radius: 3px;
+      background: var(--td-brand-color);
+      color: #fff;
+      font-size: 14px;
+      line-height: 22px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-approve:hover {
+      background: var(--td-brand-color-hover);
+    }
+
+    /* 为底部栏留出空间 */
+    .main-content {
+      padding-bottom: 88px;
     }
   </style>
 </head>
@@ -830,9 +1062,9 @@
 
     <main class="main-content">
       <div class="breadcrumb">
-        <span>受助人管理</span>
+        <span>审核中心</span>
         <span>/</span>
-        <span class="breadcrumb-current">受助人详情</span>
+        <span class="breadcrumb-current">审核详情</span>
       </div>
 
       <section class="content-card">
@@ -841,13 +1073,13 @@
             <h1 class="page-title">梧桐</h1>
             <div class="meta-row">
               <div class="meta-text">申请年度：2022</div>
-              <span class="status-tag">已提交</span>
+              <span class="status-tag status-tag--pending">待审核</span>
             </div>
           </div>
-          <a class="edit-btn" href="../beneficiary-edit/index.html">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9.2 2.2L13.8 6.8M2.5 13.5L3.6 9.2L10.8 2C11.4 1.4 12.4 1.4 13 2L14 3C14.6 3.6 14.6 4.6 14 5.2L6.8 12.4L2.5 13.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            编辑
-          </a>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+            <div style="font-size:13px;color:rgba(0,0,0,0.4);">提交人：志愿者 李明</div>
+            <div style="font-size:13px;color:rgba(0,0,0,0.4);">提交时间：2024-05-14 10:20</div>
+          </div>
         </header>
 
         <div class="tabs" role="tablist">
@@ -911,50 +1143,8 @@
           </section>
 
           <section class="section">
-            <div class="record-card">
-              <div class="record-head">
-                <div>
-                  <h2 class="section-title" style="margin:0;">家访/回访记录</h2>
-                  <div class="record-sub" id="visitRecordSub">共0条 · 0条已完成</div>
-                </div>
-                <button class="primary-btn add-visit-btn" type="button">+ 新增走访</button>
-              </div>
-              <div class="empty" id="visitEmptyState">
-                <img class="empty-illustration" src="https://ssv-design.ssv.tencent.com/tencent-charity/tencent-charity-design-skill/playground/src/cases/beneficiary-detail/assets/empty-state/empty-record-charity.svg" alt="暂无走访记录">
-                <div>暂无走访记录</div>
-                <button class="outline-btn add-visit-btn" type="button">添加第一条走访记录</button>
-              </div>
-              <div class="visit-list" id="visitRecordList">
-                <article class="visit-record">
-                  <div class="visit-record-header">
-                    <div class="visit-meta">
-                      <span class="visit-meta-item">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 2V5M11 2V5M2.5 6.5H13.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-                        2026-05-30
-                      </span>
-                      <span class="visit-meta-item">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M3.5 13C4 10.8 5.6 9.5 8 9.5C10.4 9.5 12 10.8 12.5 13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-                        admin（中国儿童少年发展基金会）
-                      </span>
-                    </div>
-                    <div class="visit-actions" id="visitActionsApp">
-                      <button class="visit-action" type="button" aria-label="编辑走访记录">编辑</button>
-                      <button class="visit-action danger" type="button" aria-label="删除走访记录">删除</button>
-                    </div>
-                  </div>
-                  <div class="visit-content-grid">
-                    <div class="visit-field">
-                      <div class="visit-field-label">家庭现状</div>
-                      <div class="visit-field-value">是对方是对方是对方是对方是对方是对方是对方是对方</div>
-                    </div>
-                    <div class="visit-field">
-                      <div class="visit-field-label">学习情况</div>
-                      <div class="visit-field-value">是对方身份是对方是对方是对方是对方是对方是对方是对方</div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
+            <h2 class="section-title">申请原因</h2>
+            <p class="text-block">学习成绩优秀，但家庭经济困难，父亲因病丧失劳动能力，希望得到资助完成学业。</p>
           </section>
 
           <section class="section">
@@ -971,7 +1161,7 @@
           <section class="section">
             <h2 class="section-title">审核记录</h2>
             <div class="audit-td-steps">
-              <div class="tdesign-like-steps">
+              <div class="tdesign-like-steps" id="auditStepsList">
                 <div class="tdesign-step-item current">
                   <div class="tdesign-step-dot"></div>
                   <div class="tdesign-step-tail"></div>
@@ -997,8 +1187,7 @@
       </section>
     </main>
 
-    <div class="drawer-mask" id="visitDrawerMask"></div>
-    <aside class="visit-drawer" id="visitDrawer" aria-label="新增走访记录">
+    <div class="drawer-mask" id="visitDrawerMask"></div>    <aside class="visit-drawer" id="visitDrawer" aria-label="新增走访记录">
       <div class="drawer-header">
         <div class="drawer-title">新增走访记录</div>
         <button class="drawer-close" type="button" id="closeVisitDrawer" aria-label="关闭">
@@ -1072,6 +1261,45 @@
         <button class="drawer-btn save" type="button" id="saveVisitRecord">保存</button>
       </div>
     </aside>
+
+    <!-- 底部常驻审核操作栏 -->
+    <div class="audit-action-bar">
+      <button class="btn-reject" type="button" id="auditRejectBtn">驳回</button>
+      <button class="btn-approve" type="button" id="auditApproveBtn">通过</button>
+    </div>
+
+    <!-- 驳回弹窗遮罩 -->
+    <div class="reject-mask" id="rejectMask"></div>
+    <!-- 驳回弹窗 -->
+    <div class="reject-dialog" id="rejectDialog" role="dialog" aria-modal="true" aria-labelledby="rejectDialogTitle">
+      <div class="reject-dialog__panel">
+        <div class="reject-dialog__header">
+          <span class="reject-dialog__title" id="rejectDialogTitle">确认驳回</span>
+          <button class="reject-dialog__close" type="button" id="rejectClose" aria-label="关闭">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="reject-dialog__body">
+          <label class="reject-dialog__label" for="rejectReason">
+            <span class="reject-dialog__required">*</span>驳回原因
+          </label>
+          <div class="reject-dialog__textarea-wrap">
+            <textarea
+              class="reject-dialog__textarea"
+              id="rejectReason"
+              maxlength="200"
+              placeholder="请说明驳回原因，便于申请人修改后重新提交"
+            ></textarea>
+            <div class="reject-dialog__count"><span id="rejectReasonCount">0</span>/200</div>
+          </div>
+          <div class="reject-dialog__hint" id="rejectHint" style="display:none;">请填写驳回原因，至少 10 字。</div>
+        </div>
+        <div class="reject-dialog__footer">
+          <button class="reject-dialog__btn reject-dialog__btn--cancel" type="button" id="rejectCancel">取消</button>
+          <button class="reject-dialog__btn reject-dialog__btn--confirm" type="button" id="rejectConfirm">确认驳回</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -1126,6 +1354,162 @@
         cancelVisitDrawer?.addEventListener('click', closeDrawer);
         visitDrawerMask?.addEventListener('click', closeDrawer);
         saveVisitRecord?.addEventListener('click', showVisitRecord);
+
+        // 审核操作
+        const rejectMask = document.getElementById('rejectMask');
+        const rejectDialog = document.getElementById('rejectDialog');
+        const rejectClose = document.getElementById('rejectClose');
+        const rejectCancel = document.getElementById('rejectCancel');
+        const rejectConfirm = document.getElementById('rejectConfirm');
+        const rejectReason = document.getElementById('rejectReason');
+        const rejectHint = document.getElementById('rejectHint');
+        const rejectReasonCount = document.getElementById('rejectReasonCount');
+
+        const openRejectDialog = () => {
+          rejectMask.classList.add('open');
+          rejectDialog.classList.add('open');
+          rejectReason.value = '';
+          rejectReasonCount.textContent = '0';
+          rejectReason.classList.remove('is-error');
+          rejectHint.style.display = 'none';
+          setTimeout(() => rejectReason.focus(), 80);
+        };
+        const closeRejectDialog = () => {
+          rejectMask.classList.remove('open');
+          rejectDialog.classList.remove('open');
+        };
+
+        rejectReason?.addEventListener('input', () => {
+          const len = rejectReason.value.length;
+          rejectReasonCount.textContent = len;
+          if (len >= 10) {
+            rejectReason.classList.remove('is-error');
+            rejectHint.style.display = 'none';
+          }
+        });
+
+        document.getElementById('auditRejectBtn')?.addEventListener('click', openRejectDialog);
+        rejectClose?.addEventListener('click', closeRejectDialog);
+        rejectCancel?.addEventListener('click', closeRejectDialog);
+        rejectMask?.addEventListener('click', closeRejectDialog);
+
+        rejectConfirm?.addEventListener('click', () => {
+          const reason = rejectReason?.value?.trim() || '';
+          if (reason.length < 10) {
+            rejectReason.classList.add('is-error');
+            rejectHint.style.display = 'block';
+            rejectReason.focus();
+            return;
+          }
+          closeRejectDialog();
+
+          // 1. 在审核记录列表顶部插入新驳回记录
+          const stepsList = document.getElementById('auditStepsList');
+          if (stepsList) {
+            // 将原有 current 步骤降为 history
+            stepsList.querySelectorAll('.tdesign-step-item.current').forEach(el => {
+              el.classList.remove('current');
+              el.classList.add('history');
+            });
+
+            const now = new Date();
+            const pad = n => String(n).padStart(2, '0');
+            const timeStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+
+            const newStep = document.createElement('div');
+            newStep.className = 'tdesign-step-item rejected';
+            newStep.innerHTML = `
+              <div class="tdesign-step-dot"></div>
+              <div class="tdesign-step-tail"></div>
+              <div class="tdesign-step-content">
+                <div class="tdesign-step-title">驳回</div>
+                <div class="audit-step-time">${timeStr}</div>
+                <div class="audit-step-desc">${reason}</div>
+              </div>
+            `;
+            stepsList.insertBefore(newStep, stepsList.firstChild);
+          }
+
+          // 2. 切换到「审核记录」Tab
+          const tabs = document.querySelectorAll('.tab');
+          const panels = document.querySelectorAll('.tab-panel');
+          tabs.forEach(t => t.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+          document.querySelector('[data-tab="audit"]')?.classList.add('active');
+          document.getElementById('audit')?.classList.add('active');
+
+          // 3. 状态 Tag 改为「已驳回」
+          const statusTag = document.querySelector('.status-tag');
+          if (statusTag) {
+            statusTag.textContent = '已驳回';
+            statusTag.className = 'status-tag status-tag--rejected';
+          }
+
+          // 4. 隐藏底部审核操作栏，还原页面底部间距
+          document.querySelector('.audit-action-bar')?.style && (document.querySelector('.audit-action-bar').style.display = 'none');
+          document.querySelector('.main-content')?.style && (document.querySelector('.main-content').style.paddingBottom = '24px');
+
+          // 5. 面包屑末级改为「受助人详情」
+          const breadcrumbCurrent = document.querySelector('.breadcrumb-current');
+          if (breadcrumbCurrent) breadcrumbCurrent.textContent = '受助人详情';
+
+          // 6. TDesign Toast 提示
+          if (window.TDesign?.MessagePlugin) {
+            TDesign.MessagePlugin.error({ content: '已驳回，审核意见已发送给提交人', duration: 2500 });
+          }
+        });
+
+        document.getElementById('auditApproveBtn')?.addEventListener('click', () => {
+          // 1. 在审核记录顶部插入新「通过」记录
+          const stepsList = document.getElementById('auditStepsList');
+          if (stepsList) {
+            stepsList.querySelectorAll('.tdesign-step-item.current').forEach(el => {
+              el.classList.remove('current');
+              el.classList.add('history');
+            });
+            const now = new Date();
+            const pad = n => String(n).padStart(2, '0');
+            const timeStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+            const newStep = document.createElement('div');
+            newStep.className = 'tdesign-step-item current';
+            newStep.innerHTML = `
+              <div class="tdesign-step-dot"></div>
+              <div class="tdesign-step-tail"></div>
+              <div class="tdesign-step-content">
+                <div class="tdesign-step-title">通过</div>
+                <div class="audit-step-time">${timeStr}</div>
+                <div class="audit-step-desc">审核通过，符合资助条件</div>
+              </div>
+            `;
+            stepsList.insertBefore(newStep, stepsList.firstChild);
+          }
+
+          // 2. 切换到「审核记录」Tab
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+          document.querySelector('[data-tab="audit"]')?.classList.add('active');
+          document.getElementById('audit')?.classList.add('active');
+
+          // 3. 隐藏底部审核操作栏，还原页面底部间距
+          document.querySelector('.audit-action-bar')?.style && (document.querySelector('.audit-action-bar').style.display = 'none');
+          document.querySelector('.main-content')?.style && (document.querySelector('.main-content').style.paddingBottom = '24px');
+
+          // 4. 状态 Tag 改为「已通过」
+          const statusTag = document.querySelector('.status-tag');
+          if (statusTag) {
+            statusTag.textContent = '已通过';
+            statusTag.className = 'status-tag status-tag--approved';
+          }
+
+          // 5. 面包屑末级改为「受助人详情」
+          const breadcrumbCurrent = document.querySelector('.breadcrumb-current');
+          if (breadcrumbCurrent) breadcrumbCurrent.textContent = '受助人详情';
+
+          // 6. TDesign Toast 提示
+          if (window.TDesign?.MessagePlugin) {
+            TDesign.MessagePlugin.success({ content: '已通过，审核结果已通知提交人', duration: 2500 });
+          }
+        });
       };
 
       const initTDesignEnhancements = () => {
@@ -1181,7 +1565,17 @@
       };
 
       initPageInteractions();
-      window.addEventListener('load', initTDesignEnhancements);
+      window.addEventListener('load', () => {
+        initTDesignEnhancements();
+        // TDesign 加载完成后，覆盖审核按钮的 Toast 为 MessagePlugin
+        if (window.TDesign?.MessagePlugin) {
+          const { MessagePlugin } = TDesign;
+          document.getElementById('auditApproveBtn')?.addEventListener('click', () => {
+            MessagePlugin.success({ content: '已通过，审核结果已通知提交人', duration: 2500 });
+          });
+          // 驳回确认的 MessagePlugin 由 rejectConfirm 动态调用，已在事件内判断
+        }
+      });
     })();
   </script>
   <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

@@ -247,6 +247,53 @@
 - Body: 内容区, padding 24px
 - Footer: 操作按钮右对齐, 取消+确认
 
+**⚠️ 位置与尺寸（强制遵循）**:
+
+| 属性 | 值 | 说明 |
+|------|-----|------|
+| 水平位置 | 水平居中 | 遮罩层内 `margin: 0 auto` |
+| 垂直位置 | **上下居中** | `top: 50%; transform: translateY(-50%)` 或 Flex 垂直居中，不得固定 top 偏移 |
+| 最大宽度 | **960px** | 超出宽度时弹窗宽度锁定 960px |
+| 最大高度 | **740px** | 超出高度时弹窗高度锁定 740px |
+| 内容超出 | Body 区域可滚动 | `overflow-y: auto`，Header 和 Footer 固定，仅 Body 滚动 |
+| 遮罩 | `rgba(0,0,0,0.4)` | 全屏覆盖 |
+
+**CSS 模板（覆盖 TDesign 默认弹窗定位）：**
+```css
+/* 弹窗居中定位 */
+.t-dialog__ctx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.t-dialog {
+  position: relative;
+  top: unset;
+  left: unset;
+  transform: none;
+  max-width: 960px;
+  max-height: 740px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* Body 区域独立滚动，Header/Footer 固定 */
+.t-dialog__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+.t-dialog__header,
+.t-dialog__footer {
+  flex-shrink: 0;
+}
+```
+
+**禁止行为：**
+- ❌ 不得将弹窗固定在 `top: 100px` 等固定偏移位置，必须上下居中
+- ❌ 不得让整个弹窗（含 Header/Footer）整体滚动，只允许 Body 内容区滚动
+- ❌ 弹窗宽度不得超过 960px，高度不得超过 740px
+
 ### 06 抽屉 (Drawer)
 
 - 方向: 右侧滑入
@@ -333,7 +380,7 @@ Logo区域 (64px高)
 - 文案: 14px, rgba(0,0,0,0.4)
 - 位置: 区域内垂直水平居中
 - 操作按钮: 默认按钮或 outline 按钮；若引导创建第一条记录，文案使用 `添加第一条XX记录`
-- 资源沉淀: 本地 SVG 推荐放在案例目录 `assets/empty-state/` 下，例如 `assets/empty-state/empty-record-charity.svg`
+- 资源沉淀: 图片资源上传 CDN 后使用线上链接，例如 `https://ssv-design.ssv.tencent.com/tencent-charity/tencent-charity-design-skill/playground/src/cases/beneficiary-detail/assets/empty-state/empty-record-charity.svg`
 
 ### 12 Loading 加载
 
@@ -639,3 +686,21 @@ Logo区域 (64px高)
 | 大区块间 | 32px |
 | 按钮组内 | 8-12px |
 | 表单项间 | 24px |
+
+### 一致性检测规则（强制遵循）
+
+AI 在生成或修改页面后，必须扫描当前界面内同属性/同语义/同层级的组件和内容，确保它们具有一致的样式和交互。
+
+**检测范围：**
+- 视觉样式：颜色、字号、字重、圆角、边框、阴影、背景、图标尺寸
+- 布局间距：内边距、外边距、栅格列数、对齐方式、模块间距
+- 内容结构：标题/说明/标签/数值的层级、顺序、换行和空态表现
+- 状态表现：默认、hover、active、selected、disabled、loading、error、success
+- 交互行为：点击区域、跳转方式、校验触发、反馈 Toast、弹窗确认、数据保留
+
+**强制规则：**
+1. 同一页面中，同属性组件必须复用同一 class / token / 组件封装，禁止复制后局部改样式。
+2. 同语义内容必须使用一致的展示结构，例如所有确认信息项都使用同一 `label/value` 卡片结构。
+3. 同层级操作必须保持一致交互，例如同一按钮组中的次要按钮都使用 `variant="outline"`，同一类列表项点击区域一致。
+4. 状态文案语义一致时，必须使用同一状态映射表，不得同一状态一处用 Tag、一处用圆点，除非规范明确区分表格/卡片场景。
+5. 如确需差异，必须能说明明确业务语义，并通过命名变体表达，例如 `confirm-item--full`、`status-pill--process`。

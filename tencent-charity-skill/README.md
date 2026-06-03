@@ -14,7 +14,7 @@
 ## 目录结构
 
 ```
-tencent-charity-skill/
+tencent-charity-design-skill/
 ├── SKILL.md              ← AI 主指令（核心）
 ├── registry.ts           ← 技能注册中心
 ├── specs/                ← 设计规范（你需要填充）

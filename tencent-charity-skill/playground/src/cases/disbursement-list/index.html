@@ -333,7 +333,7 @@
 
                 <!-- Action Row -->
                 <div class="action-row">
-                    <t-button theme="primary">+ 新建微信拨付单</t-button>
+                    <t-button theme="primary" @click="openCreateDisbursement">+ 新建微信拨付单</t-button>
                     <t-button variant="outline">微信批量拨付</t-button>
                     <t-button variant="outline">批量下载转账凭证</t-button>
                     <t-button variant="outline">批量下载拨付单</t-button>
@@ -386,6 +386,10 @@
                     searchKeyword.value = '';
                     batchFilter.value = '';
                     statusFilter.value = '';
+                };
+
+                const openCreateDisbursement = () => {
+                    window.location.href = '../disbursement-create/index.html';
                 };
 
                 // Table selection
@@ -464,6 +468,7 @@
                     statusFilter,
                     onSearch,
                     onReset,
+                    openCreateDisbursement,
                     selectedRowKeys,
                     onSelectChange,
                     currentPage,

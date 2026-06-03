@@ -35,7 +35,7 @@ export default function Page() {
       </div>
       <div className="browser-screen">
         <div className="login-bg">
-          <img src="https://ssv-design.ssv.tencent.com/tencent-charity/assets/login-bg.png" alt="" />
+          <img src="https://ssv-design.ssv.tencent.com/tencent-charity/tencent-charity-design-skill/playground/public/login-bg.png" alt="" />
         </div>
         <div className="login-header">
           <span className="platform-name">公益补贴管理系统</span>
