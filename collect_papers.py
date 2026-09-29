@@ -90,6 +90,8 @@ def openalex_records(payload):
             "abstractStatus": "已有摘要" if item.get("abstract_inverted_index") else "OpenAlex 无摘要，待 Crossref/Semantic Scholar 回填",
             "openAccess": item.get("open_access") or {},
             "openAccessLocation": item.get("best_oa_location") or {},
+            "landingPageUrl": item.get("primary_location", {}).get("landing_page_url") or "",
+            "pdfUrl": (item.get("best_oa_location") or {}).get("pdf_url") or "",
             "venue": venue, "publicationType": "journal" if item.get("type") == "article" else "other",
             "discoverySource": "OpenAlex", "originalSource": original_source, "sourceLevel": level,
             "doi": item.get("doi") or "", "url": item.get("primary_location", {}).get("landing_page_url") or item.get("id", ""),
