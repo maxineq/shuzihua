@@ -134,6 +134,23 @@ def semantic_abstract(title):
         return ""
 
 
+def record_key(item):
+    doi = clean_text(item.get("doi")).lower()
+    doi = re.sub(r"^https?://doi.org/", "", doi).rstrip("/")
+    if doi:
+        return ("doi", doi)
+    return ("title", clean_text(item.get("title")).lower())
+
+
+def merge_record(old, fresh):
+    merged = dict(old)
+    for key, value in fresh.items():
+        if value not in (None, "", [], {}):
+            merged[key] = value
+    merged["saved"] = bool(old.get("saved", False) or fresh.get("saved", False))
+    return merged
+
+
 def main():
     try:
         records = openalex_records(fetch_json(openalex_url()))
@@ -145,25 +162,32 @@ def main():
 
     with open(DATA_FILE, encoding="utf-8") as handle:
         existing = json.load(handle)
-    by_doi = {clean_text(item.get("doi")).lower(): item for item in existing if item.get("doi")}
-    by_title = {clean_text(item.get("title")).lower(): item for item in existing}
+    by_key = {}
+    merged = []
+    for item in existing:
+        key = record_key(item)
+        if key in by_key:
+            index = by_key[key]
+            merged[index] = merge_record(merged[index], item)
+        else:
+            by_key[key] = len(merged)
+            merged.append(item)
+    added = 0
     for record in records:
         if not record.get("abstract"):
             fallback = semantic_abstract(record.get("title", ""))
             if fallback:
                 record["abstract"] = fallback
                 record["abstractStatus"] = "Semantic Scholar 回填"
-    added = 0
-    for record in records:
-        doi = clean_text(record.get("doi")).lower()
-        title = clean_text(record.get("title")).lower()
-        if (doi and doi in by_doi) or title in by_title:
-            continue
-        existing.insert(0, record)
-        if doi:
-            by_doi[doi] = record
-        by_title[title] = record
-        added += 1
+        key = record_key(record)
+        if key in by_key:
+            index = by_key[key]
+            merged[index] = merge_record(merged[index], record)
+        else:
+            by_key[key] = len(merged)
+            merged.append(record)
+            added += 1
+    existing = merged
     with open(DATA_FILE, "w", encoding="utf-8") as handle:
         json.dump(existing, handle, ensure_ascii=False, indent=2)
         handle.write("\n")

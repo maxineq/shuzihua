@@ -1,5 +1,189 @@
 [
   {
+    "id": 1,
+    "title": "Aesthetic Assessment of AI-Generated Images: A Human-Centered Benchmark",
+    "authors": [
+      "L. Chen",
+      "M. Garcia"
+    ],
+    "year": 2025,
+    "abstract": "提出面向生成图像的多维美学评价框架，比较人工评分、成对偏好与视觉语言模型裁判的一致性。",
+    "venue": "CHI 2025",
+    "tags": [
+      "生成模型",
+      "视觉美学"
+    ],
+    "score": 98,
+    "saved": true,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 2,
+    "title": "What Makes an Image Beautiful? Disentangling Perceptual and Semantic Factors",
+    "authors": [
+      "S. Park",
+      "J. Kim"
+    ],
+    "year": 2024,
+    "abstract": "从感知特征与语义内容两个层面解释图像美感，讨论构图、色彩、熟悉度对审美判断的相对作用。",
+    "venue": "TVCG 2024",
+    "tags": [
+      "视觉美学",
+      "用户偏好"
+    ],
+    "score": 96,
+    "saved": true,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 3,
+    "title": "Aesthetic Visual Quality Assessment with Large Vision-Language Models",
+    "authors": [
+      "Y. Wang",
+      "R. Singh"
+    ],
+    "year": 2025,
+    "abstract": "研究大视觉语言模型作为美学评测器的可靠性，覆盖评分校准、提示词设计和人机一致性分析。",
+    "venue": "arXiv 2025",
+    "tags": [
+      "多模态",
+      "生成模型"
+    ],
+    "score": 95,
+    "saved": true,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 4,
+    "title": "The Role of Cultural Context in Aesthetic Preference Modeling",
+    "authors": [
+      "A. Rivera",
+      "N. Li"
+    ],
+    "year": 2023,
+    "abstract": "关注跨文化审美偏好差异，提出在数据集与评价标准中纳入地域、文化与观看经验变量。",
+    "venue": "CSCW 2023",
+    "tags": [
+      "用户偏好",
+      "文化适配"
+    ],
+    "score": 91,
+    "saved": false,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 5,
+    "title": "From Pairwise Preference to Rubric-Based Aesthetic Evaluation",
+    "authors": [
+      "T. Müller",
+      "K. Zhao"
+    ],
+    "year": 2024,
+    "abstract": "比较成对比较、Likert量表和结构化评分规约三种方法，为复杂审美任务设计可复现的评测流程。",
+    "venue": "IUI 2024",
+    "tags": [
+      "视觉美学",
+      "用户偏好"
+    ],
+    "score": 89,
+    "saved": false,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 6,
+    "title": "Evaluating Style Consistency in Multimodal Generative Systems",
+    "authors": [
+      "P. Rossi",
+      "E. Huang"
+    ],
+    "year": 2025,
+    "abstract": "将风格一致性拆解为视觉语言、材质表达与跨样本稳定性，提出适用于多模态生成系统的评测协议。",
+    "venue": "NeurIPS 2025",
+    "tags": [
+      "多模态",
+      "生成模型"
+    ],
+    "score": 88,
+    "saved": false,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 7,
+    "title": "Aesthetics in the Loop: Human Feedback for Creative AI",
+    "authors": [
+      "D. Lee",
+      "H. Wilson"
+    ],
+    "year": 2023,
+    "abstract": "讨论创意生成工具中的人类反馈闭环，分析用户何时愿意修正模型以及反馈如何影响后续生成。",
+    "venue": "DIS 2023",
+    "tags": [
+      "用户偏好",
+      "生成模型"
+    ],
+    "score": 86,
+    "saved": false,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
+    "id": 8,
+    "title": "Measuring Visual Pleasure in Interactive Interfaces",
+    "authors": [
+      "C. Brown",
+      "F. Zhang"
+    ],
+    "year": 2022,
+    "abstract": "构建交互界面视觉愉悦量表，探讨视觉质量、易用性和情绪反应之间的关系。",
+    "venue": "INTERACT 2022",
+    "tags": [
+      "视觉美学",
+      "用户偏好"
+    ],
+    "score": 84,
+    "saved": false,
+    "discoverySource": "历史内置目录",
+    "originalSource": "历史页面记录",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "publicationType": "other"
+  },
+  {
     "id": "https://openalex.org/W2153146203",
     "title": "Facets of visual aesthetics",
     "authors": [
@@ -68,28 +252,5 @@
     "score": 0,
     "saved": false,
     "collectedAt": "2026-09-29T13:56:40.334431+00:00"
-  },
-  {
-    "id": "demo-1",
-    "title": "Aesthetic Assessment of AI-Generated Images: A Human-Centered Benchmark",
-    "authors": [
-      "L. Chen",
-      "M. Garcia"
-    ],
-    "year": 2025,
-    "abstract": "示例记录：面向生成图像的多维美学评价框架。部署自动收集后将由论文 API 数据替换或补充。",
-    "venue": "CHI 2025",
-    "publicationType": "conference",
-    "discoverySource": "demo",
-    "originalSource": "待核验",
-    "sourceLevel": "待核验",
-    "doi": "",
-    "url": "",
-    "tags": [
-      "生成模型",
-      "视觉美学"
-    ],
-    "score": 98,
-    "saved": true
   }
 ]
