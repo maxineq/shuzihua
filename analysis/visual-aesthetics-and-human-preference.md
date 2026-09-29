@@ -2,7 +2,7 @@
 
 - **作者**：Stephen E Palmer、Karen B. Schloss、Jonathan Sammartino
 - **年份/来源**：2011 / Annual Review of Psychology
-- **全文状态**：未配置完整 LLM_API_URL/LLM_API_KEY/LLM_MODEL，未生成全文翻译或技术解析。
+- **全文状态**：尚未人工导入翻译或技术解析。请将论文内容交给对话助手生成 Markdown 后导入。
 - **正文抽取**：失败
 - **全文来源**：未找到可公开访问的全文链接
 - **摘要状态**：已有摘要
@@ -13,4 +13,4 @@
 未生成。
 
 ## 分析状态
-未配置完整 LLM_API_URL/LLM_API_KEY/LLM_MODEL，未生成全文翻译或技术解析。
+尚未人工导入翻译或技术解析。请将论文内容交给对话助手生成 Markdown 后导入。

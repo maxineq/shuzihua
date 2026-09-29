@@ -1,47 +1,25 @@
 # 美学评测研究库
 
-这是一个可部署到 GitHub Pages 的静态论文研究工具，包含页面、论文数据和 GitHub Actions 自动采集流程。
+这是一个部署到 GitHub Pages 的静态论文研究工具：GitHub Actions 自动收集论文元数据，论文翻译与技术解析由用户通过对话助手完成，再以 Markdown 人工导入仓库。
 
 ## 部署
 
-1. 将本目录中的全部文件复制到 GitHub 仓库根目录。
-2. 在仓库 `Settings > Pages` 中选择 `GitHub Actions`，或选择 `main` 分支的根目录。
-3. 打开仓库 `Actions`，手动运行一次 `Collect aesthetic evaluation papers`，确认 `papers.json` 成功更新。
-4. GitHub Actions 默认每天 UTC 01:00 运行，对应北京时间 09:00。
+1. 在仓库的 Pages 设置中选择 GitHub Actions。
+2. 推送到 main 会触发 Pages 部署；论文收集工作流默认每天 UTC 01:00（北京时间 09:00）运行。
+3. 也可以在 Actions 中手动运行收集任务。
 
-## 自动收集机制
+## 自动收集
 
-- 数据源：OpenAlex 公共 API。
-- 检索词：`aesthetic evaluation`、`visual aesthetics`、`human preference`。
-- 每次最多拉取 30 条结果。
-- 使用 DOI 或标题去重。
-- 将 venue、DOI、链接、作者、摘要和发现来源写入 `papers.json`。
-- 页面打开时读取同目录的 `papers.json`。
+数据源为 OpenAlex 公共 API，每次最多拉取 30 条结果，使用 DOI 或标题去重，并写入 papers.json。自动任务不会下载全文、调用 LLM 或生成翻译分析。仓库不再使用 LLM_API_URL、LLM_API_KEY、LLM_MODEL。
 
-## 修改检索主题
+## 人工翻译与解析导入
 
-编辑 `.github/workflows/collect-papers.yml` 中的 `PAPER_QUERY`，然后提交。建议扩展为：
+1. 在首页点击“导入分析”或打开论文详情，复制论文内容（仅限你有权访问和处理的内容）给对话助手。
+2. 要求助手输出 Markdown，建议包含：中文摘要翻译、研究问题、方法/模型、数据集、评测指标、关键技术、实验结论、局限性、可迁移启示。
+3. 将文件命名为论文标题对应的 slug，例如 analysis/my-paper-title.md。
+4. 更新 analysis/README.md（运行 python3 analyze_papers.py 可自动刷新索引），提交并推送到 GitHub。
+5. Pages 部署完成后刷新页面，即可在论文详情查看解析；使用页面的“本地预览 Markdown”只会在当前浏览器预览，不会自动写回 GitHub。
 
-```text
-"aesthetic assessment" OR "image quality assessment" OR "visual preference" OR "aesthetic quality"
-```
+## 版权与隐私边界
 
-## 来源等级
-
-当前脚本把 OpenAlex 作为发现来源，并保留 `venue`、`doi`、`originalSource`、`sourceLevel` 字段。OpenAlex 的元数据不等于正式出版核验，正式发表信息仍应回到 DOI、出版社、ACM、IEEE 或会议官网确认。
-
-## 限制
-
-GitHub Pages 只负责展示页面。自动收集由 GitHub Actions 执行，页面本身不会在浏览器关闭后运行。当前流程不需要 API Key，但公开仓库中的 Actions 需要拥有写入 `papers.json` 的权限。
-
-## 全文翻译与技术解析
-
-运行 `python3 analyze_papers.py` 会从 `papers.json` 读取有 `url` 或 `doi` 的论文，并优先尝试 arXiv HTML/PDF、开放获取链接或记录中的链接。无法取得全文时会明确标记“全文不可用”，绝不伪造全文。脚本在 `analysis/` 生成逐篇 Markdown 和索引；未配置 API 时生成包含完整栏目结构的待处理模板。
-
-配置以下 GitHub Actions Secrets 后，论文收集完成会自动调用外部 LLM：
-
-- `LLM_API_URL`：兼容 Chat Completions 的 API 地址
-- `LLM_API_KEY`：API 密钥
-- `LLM_MODEL`：模型名称
-
-仅处理开放获取全文或用户有权访问的全文；不绕过付费墙，也不将整篇受版权保护的译文公开发布。公开内容限于摘要翻译、分析和必要的短摘录，并应遵守来源平台、出版社及论文许可条款。
+仅处理开放获取、授权访问或你明确有权使用的论文内容。翻译和解析应遵守出版社、作者、数据库及论文许可证条款；不要绕过付费墙，不要把受版权保护的整篇译文公开到仓库，优先导入摘要翻译、研究分析和必要的短摘录。不要上传包含个人隐私或机密信息的材料。

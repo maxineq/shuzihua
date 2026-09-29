@@ -1,4 +1,4 @@
-name: Collect and analyze papers
+name: Collect papers
 on:
   schedule:
     - cron: "0 1 * * *"
@@ -16,16 +16,12 @@ jobs:
           PAPER_QUERY: '"aesthetic evaluation" OR "visual aesthetics" OR "human preference"'
           PAPER_LIMIT: "30"
         run: python3 collect_papers.py
-      - name: Analyze papers when API is configured
-        env:
-          LLM_API_URL: ${{ secrets.LLM_API_URL }}
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+      - name: Refresh manual analysis index
         run: python3 analyze_papers.py
-      - name: Commit updated paper data and analyses
+      - name: Commit updated paper data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add papers.json analysis/
-          git diff --cached --quiet || git commit -m "chore: update paper collection and analysis"
+          git add papers.json analysis/README.md
+          git diff --cached --quiet || git commit -m "chore: update paper collection"
           git push
