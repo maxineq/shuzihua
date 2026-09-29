@@ -2,6 +2,8 @@
 import json
 import os
 import re
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -13,15 +15,27 @@ QUERY = os.environ.get(
     '"aesthetic evaluation" OR "visual aesthetics" OR "human preference"'
 )
 LIMIT = int(os.environ.get("PAPER_LIMIT", "30"))
+OPENALEX_MAILTO = os.environ.get("OPENALEX_MAILTO", "")
+MAX_RETRIES = 3
 
 
 def fetch_json(url):
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": "aesthetic-eval-library/1.0 research bot"},
-    )
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)
+    for attempt in range(MAX_RETRIES + 1):
+        request = urllib.request.Request(
+            url,
+            headers={"User-Agent": "aesthetic-eval-library/1.0 research bot"},
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                return json.load(response)
+        except urllib.error.HTTPError as error:
+            retryable = error.code == 429 or 500 <= error.code <= 599
+            if not retryable or attempt == MAX_RETRIES:
+                raise
+        except (urllib.error.URLError, TimeoutError):
+            if attempt == MAX_RETRIES:
+                raise
+        time.sleep(2 ** attempt)
 
 
 def clean_text(value):
@@ -38,61 +52,103 @@ def reconstruct_abstract(inverted_index):
     return clean_text(" ".join(word for _, word in sorted(words)))
 
 
-def classify(item):
-    venue = clean_text(item.get("primary_location", {}).get("source", {}).get("display_name"))
+def classify(venue):
+    venue = clean_text(venue)
     if venue:
         return venue, "正式发表信息待核验", "C"
-    return "OpenAlex 未标注 venue", "开放元数据记录", "C"
+    return "未标注 venue", "开放元数据记录", "C"
 
 
-def main():
-    params = urllib.parse.urlencode({"search": QUERY, "per-page": LIMIT})
-    payload = fetch_json(f"https://api.openalex.org/works?{params}")
-    existing = json.load(open(DATA_FILE, encoding="utf-8")) if os.path.exists(DATA_FILE) else []
-    by_doi = {item.get("doi"): item for item in existing if item.get("doi")}
-    by_title = {clean_text(item.get("title")).lower(): item for item in existing}
+def openalex_url():
+    params = {"search": QUERY, "per-page": LIMIT}
+    if OPENALEX_MAILTO:
+        params["mailto"] = OPENALEX_MAILTO
+    return f"https://api.openalex.org/works?{urllib.parse.urlencode(params)}"
 
-    added = 0
+
+def crossref_url():
+    params = {"query": QUERY, "rows": LIMIT, "select": "DOI,title,author,published,container-title,URL,abstract,type"}
+    return f"https://api.crossref.org/works?{urllib.parse.urlencode(params)}"
+
+
+def openalex_records(payload):
+    records = []
     for item in payload.get("results", []):
         title = clean_text(item.get("title"))
         if not title:
             continue
-        doi = item.get("doi") or ""
-        if doi in by_doi or title.lower() in by_title:
-            continue
-        venue, original_source, level = classify(item)
-        authors = [
-            clean_text(author.get("author", {}).get("display_name"))
-            for author in item.get("authorships", [])[:6]
-        ]
-        record = {
-            "id": item.get("id", title),
-            "title": title,
+        venue, original_source, level = classify(
+            item.get("primary_location", {}).get("source", {}).get("display_name")
+        )
+        authors = [clean_text(author.get("author", {}).get("display_name"))
+                   for author in item.get("authorships", [])[:6]]
+        records.append({
+            "id": item.get("id", title), "title": title,
             "authors": [author for author in authors if author],
             "year": item.get("publication_year"),
             "abstract": reconstruct_abstract(item.get("abstract_inverted_index")),
-            "venue": venue,
-            "publicationType": "journal" if item.get("type") == "article" else "other",
-            "discoverySource": "OpenAlex",
-            "originalSource": original_source,
-            "sourceLevel": level,
-            "doi": doi,
-            "url": item.get("primary_location", {}).get("landing_page_url") or item.get("id", ""),
-            "tags": ["视觉美学"],
-            "score": 0,
-            "saved": False,
+            "venue": venue, "publicationType": "journal" if item.get("type") == "article" else "other",
+            "discoverySource": "OpenAlex", "originalSource": original_source, "sourceLevel": level,
+            "doi": item.get("doi") or "", "url": item.get("primary_location", {}).get("landing_page_url") or item.get("id", ""),
+            "tags": ["视觉美学"], "score": 0, "saved": False,
             "collectedAt": datetime.now(timezone.utc).isoformat(),
-        }
+        })
+    return records
+
+
+def crossref_records(payload):
+    records = []
+    for item in payload.get("message", {}).get("items", []):
+        title = clean_text((item.get("title") or [""])[0])
+        if not title:
+            continue
+        venue, original_source, level = classify((item.get("container-title") or [""])[0])
+        authors = [clean_text(f"{author.get('given', '')} {author.get('family', '')}")
+                   for author in item.get("author", [])[:6]]
+        date_parts = (item.get("published", {}).get("date-parts") or [[]])[0]
+        abstract = clean_text(re.sub(r"<[^>]+>", " ", item.get("abstract", "")))
+        doi = item.get("DOI", "")
+        records.append({
+            "id": f"https://doi.org/{doi}" if doi else item.get("URL", title), "title": title,
+            "authors": [author for author in authors if author], "year": date_parts[0] if date_parts else None,
+            "abstract": abstract, "venue": venue,
+            "publicationType": "journal" if item.get("type") == "journal-article" else "other",
+            "discoverySource": "Crossref", "originalSource": original_source, "sourceLevel": level,
+            "doi": f"https://doi.org/{doi}" if doi else "", "url": item.get("URL") or (f"https://doi.org/{doi}" if doi else ""),
+            "tags": ["视觉美学"], "score": 0, "saved": False,
+            "collectedAt": datetime.now(timezone.utc).isoformat(),
+        })
+    return records
+
+
+def main():
+    try:
+        records = openalex_records(fetch_json(openalex_url()))
+        source = "OpenAlex"
+    except Exception as error:
+        print(f"OpenAlex failed ({error}); trying Crossref")
+        records = crossref_records(fetch_json(crossref_url()))
+        source = "Crossref"
+
+    with open(DATA_FILE, encoding="utf-8") as handle:
+        existing = json.load(handle)
+    by_doi = {clean_text(item.get("doi")).lower(): item for item in existing if item.get("doi")}
+    by_title = {clean_text(item.get("title")).lower(): item for item in existing}
+    added = 0
+    for record in records:
+        doi = clean_text(record.get("doi")).lower()
+        title = clean_text(record.get("title")).lower()
+        if (doi and doi in by_doi) or title in by_title:
+            continue
         existing.insert(0, record)
         if doi:
             by_doi[doi] = record
-        by_title[title.lower()] = record
+        by_title[title] = record
         added += 1
-
     with open(DATA_FILE, "w", encoding="utf-8") as handle:
         json.dump(existing, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
-    print(f"Collected {added} new papers; total {len(existing)}")
+    print(f"Collected {added} new papers from {source}; total {len(existing)}")
 
 
 if __name__ == "__main__":

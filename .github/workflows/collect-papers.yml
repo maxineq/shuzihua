@@ -18,6 +18,7 @@ jobs:
         env:
           PAPER_QUERY: '"aesthetic evaluation" OR "visual aesthetics" OR "human preference"'
           PAPER_LIMIT: "30"
+          OPENALEX_MAILTO: ""
         run: python3 collect_papers.py
       - name: Commit updated paper data
         run: |

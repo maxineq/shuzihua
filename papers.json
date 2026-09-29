@@ -1,8 +1,81 @@
 [
   {
+    "id": "https://openalex.org/W2153146203",
+    "title": "Facets of visual aesthetics",
+    "authors": [
+      "Morten Moshagen",
+      "Meinald T. Thielsch"
+    ],
+    "year": 2010,
+    "abstract": "",
+    "venue": "International Journal of Human-Computer Studies",
+    "publicationType": "journal",
+    "discoverySource": "OpenAlex",
+    "originalSource": "正式发表信息待核验",
+    "sourceLevel": "C",
+    "doi": "https://doi.org/10.1016/j.ijhcs.2010.05.006",
+    "url": "https://doi.org/10.1016/j.ijhcs.2010.05.006",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-29T13:56:40.334481+00:00"
+  },
+  {
+    "id": "https://openalex.org/W1971604583",
+    "title": "Assessing dimensions of perceived visual aesthetics of web sites",
+    "authors": [
+      "Talia Lavie",
+      "Noam Tractinsky"
+    ],
+    "year": 2003,
+    "abstract": "",
+    "venue": "International Journal of Human-Computer Studies",
+    "publicationType": "journal",
+    "discoverySource": "OpenAlex",
+    "originalSource": "正式发表信息待核验",
+    "sourceLevel": "C",
+    "doi": "https://doi.org/10.1016/j.ijhcs.2003.09.002",
+    "url": "https://doi.org/10.1016/j.ijhcs.2003.09.002",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-29T13:56:40.334467+00:00"
+  },
+  {
+    "id": "https://openalex.org/W2157899060",
+    "title": "Visual Aesthetics and Human Preference",
+    "authors": [
+      "Stephen E Palmer",
+      "Karen B. Schloss",
+      "Jonathan Sammartino"
+    ],
+    "year": 2011,
+    "abstract": "Human aesthetic preference in the visual domain is reviewed from definitional, methodological, empirical, and theoretical perspectives. Aesthetic science is distinguished from the perception of art and from philosophical treatments of aesthetics. The strengths and weaknesses of important behavioral techniques are presented and discussed, including two-alternative forced-choice, rank order, subjective rating, production/adjustment, indirect, and other tasks. Major findings are reviewed about preferences for colors (single colors, color combinations, and color harmony), spatial structure (low-level spatial properties, shape properties, and spatial composition within a frame), and individual differences in both color and spatial structure. Major theoretical accounts of aesthetic response are outlined and evaluated, including explanations in terms of mere exposure effects, arousal dynamics, categorical prototypes, ecological factors, perceptual and conceptual fluency, and the interaction of multiple components. The results of the review support the conclusion that aesthetic response can be studied rigorously and meaningfully within the framework of scientific psychology.",
+    "venue": "Annual Review of Psychology",
+    "publicationType": "other",
+    "discoverySource": "OpenAlex",
+    "originalSource": "正式发表信息待核验",
+    "sourceLevel": "C",
+    "doi": "https://doi.org/10.1146/annurev-psych-120710-100504",
+    "url": "https://doi.org/10.1146/annurev-psych-120710-100504",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-29T13:56:40.334431+00:00"
+  },
+  {
     "id": "demo-1",
     "title": "Aesthetic Assessment of AI-Generated Images: A Human-Centered Benchmark",
-    "authors": ["L. Chen", "M. Garcia"],
+    "authors": [
+      "L. Chen",
+      "M. Garcia"
+    ],
     "year": 2025,
     "abstract": "示例记录：面向生成图像的多维美学评价框架。部署自动收集后将由论文 API 数据替换或补充。",
     "venue": "CHI 2025",
@@ -12,7 +85,10 @@
     "sourceLevel": "待核验",
     "doi": "",
     "url": "",
-    "tags": ["生成模型", "视觉美学"],
+    "tags": [
+      "生成模型",
+      "视觉美学"
+    ],
     "score": 98,
     "saved": true
   }
