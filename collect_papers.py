@@ -55,8 +55,8 @@ def reconstruct_abstract(inverted_index):
 def classify(venue):
     venue = clean_text(venue)
     if venue:
-        return venue, "正式发表信息待核验", "C"
-    return "未标注 venue", "开放元数据记录", "C"
+        return venue, "OpenAlex/Crossref API", "A"
+    return "未标注 venue", "OpenAlex/Crossref API", "A"
 
 
 def openalex_url():
@@ -94,7 +94,9 @@ def openalex_records(payload):
             "pdfUrl": (item.get("best_oa_location") or {}).get("pdf_url") or "",
             "venue": venue, "publicationType": "journal" if item.get("type") == "article" else "other",
             "discoverySource": "OpenAlex", "originalSource": original_source, "sourceLevel": level,
-            "doi": item.get("doi") or "", "url": item.get("primary_location", {}).get("landing_page_url") or item.get("id", ""),
+            "doi": item.get("doi") or "", "publisherUrl": item.get("primary_location", {}).get("landing_page_url") or "",
+            "openAccessUrl": (item.get("best_oa_location") or {}).get("landing_page_url") or (item.get("best_oa_location") or {}).get("url") or "",
+            "url": item.get("primary_location", {}).get("landing_page_url") or item.get("doi") or "",
             "tags": ["视觉美学"], "score": 0, "saved": False,
             "collectedAt": datetime.now(timezone.utc).isoformat(),
         })
@@ -119,7 +121,9 @@ def crossref_records(payload):
             "abstract": abstract, "abstractStatus": "已有摘要" if abstract else "Crossref 无摘要，待 Semantic Scholar 回填", "venue": venue,
             "publicationType": "journal" if item.get("type") == "journal-article" else "other",
             "discoverySource": "Crossref", "originalSource": original_source, "sourceLevel": level,
-            "doi": f"https://doi.org/{doi}" if doi else "", "url": item.get("URL") or (f"https://doi.org/{doi}" if doi else ""),
+            "doi": f"https://doi.org/{doi}" if doi else "", "publisherUrl": item.get("URL") or "",
+            "openAccessUrl": "",
+            "url": item.get("URL") or (f"https://doi.org/{doi}" if doi else ""),
             "tags": ["视觉美学"], "score": 0, "saved": False,
             "collectedAt": datetime.now(timezone.utc).isoformat(),
         })
@@ -164,6 +168,8 @@ def main():
 
     with open(DATA_FILE, encoding="utf-8") as handle:
         existing = json.load(handle)
+    # 仅保留 API 采集且具备 DOI 或稳定原文 URL 的真实记录；历史/演示记录全部淘汰。
+    existing = [item for item in existing if item.get("discoverySource") in {"OpenAlex", "Crossref"} and (item.get("doi") or item.get("publisherUrl") or item.get("url")) and item.get("sourceLevel") == "A"]
     by_key = {}
     merged = []
     for item in existing:
