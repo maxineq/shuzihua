@@ -87,6 +87,9 @@ def openalex_records(payload):
             "authors": [author for author in authors if author],
             "year": item.get("publication_year"),
             "abstract": reconstruct_abstract(item.get("abstract_inverted_index")),
+            "abstractStatus": "已有摘要" if item.get("abstract_inverted_index") else "OpenAlex 无摘要，待 Crossref/Semantic Scholar 回填",
+            "openAccess": item.get("open_access") or {},
+            "openAccessLocation": item.get("best_oa_location") or {},
             "venue": venue, "publicationType": "journal" if item.get("type") == "article" else "other",
             "discoverySource": "OpenAlex", "originalSource": original_source, "sourceLevel": level,
             "doi": item.get("doi") or "", "url": item.get("primary_location", {}).get("landing_page_url") or item.get("id", ""),
@@ -111,7 +114,7 @@ def crossref_records(payload):
         records.append({
             "id": f"https://doi.org/{doi}" if doi else item.get("URL", title), "title": title,
             "authors": [author for author in authors if author], "year": date_parts[0] if date_parts else None,
-            "abstract": abstract, "venue": venue,
+            "abstract": abstract, "abstractStatus": "已有摘要" if abstract else "Crossref 无摘要，待 Semantic Scholar 回填", "venue": venue,
             "publicationType": "journal" if item.get("type") == "journal-article" else "other",
             "discoverySource": "Crossref", "originalSource": original_source, "sourceLevel": level,
             "doi": f"https://doi.org/{doi}" if doi else "", "url": item.get("URL") or (f"https://doi.org/{doi}" if doi else ""),
@@ -119,6 +122,16 @@ def crossref_records(payload):
             "collectedAt": datetime.now(timezone.utc).isoformat(),
         })
     return records
+
+
+def semantic_abstract(title):
+    url = "https://api.semanticscholar.org/graph/v1/paper/search?" + urllib.parse.urlencode({"query": title, "limit": 1, "fields": "title,abstract"})
+    try:
+        payload = fetch_json(url)
+        item = (payload.get("data") or [{}])[0]
+        return clean_text(item.get("abstract"))
+    except Exception:
+        return ""
 
 
 def main():
@@ -134,6 +147,12 @@ def main():
         existing = json.load(handle)
     by_doi = {clean_text(item.get("doi")).lower(): item for item in existing if item.get("doi")}
     by_title = {clean_text(item.get("title")).lower(): item for item in existing}
+    for record in records:
+        if not record.get("abstract"):
+            fallback = semantic_abstract(record.get("title", ""))
+            if fallback:
+                record["abstract"] = fallback
+                record["abstractStatus"] = "Semantic Scholar 回填"
     added = 0
     for record in records:
         doi = clean_text(record.get("doi")).lower()
