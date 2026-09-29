@@ -1,13 +1,10 @@
-name: Collect aesthetic evaluation papers
-
+name: Collect and analyze papers
 on:
   schedule:
     - cron: "0 1 * * *"
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   collect:
     runs-on: ubuntu-latest
@@ -18,12 +15,17 @@ jobs:
         env:
           PAPER_QUERY: '"aesthetic evaluation" OR "visual aesthetics" OR "human preference"'
           PAPER_LIMIT: "30"
-          OPENALEX_MAILTO: ""
         run: python3 collect_papers.py
-      - name: Commit updated paper data
+      - name: Analyze papers when API is configured
+        env:
+          LLM_API_URL: ${{ secrets.LLM_API_URL }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+        run: python3 analyze_papers.py
+      - name: Commit updated paper data and analyses
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add papers.json
-          git diff --cached --quiet || git commit -m "chore: update paper collection"
+          git add papers.json analysis/
+          git diff --cached --quiet || git commit -m "chore: update paper collection and analysis"
           git push

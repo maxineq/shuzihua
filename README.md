@@ -33,3 +33,15 @@
 ## 限制
 
 GitHub Pages 只负责展示页面。自动收集由 GitHub Actions 执行，页面本身不会在浏览器关闭后运行。当前流程不需要 API Key，但公开仓库中的 Actions 需要拥有写入 `papers.json` 的权限。
+
+## 全文翻译与技术解析
+
+运行 `python3 analyze_papers.py` 会从 `papers.json` 读取有 `url` 或 `doi` 的论文，并优先尝试 arXiv HTML/PDF、开放获取链接或记录中的链接。无法取得全文时会明确标记“全文不可用”，绝不伪造全文。脚本在 `analysis/` 生成逐篇 Markdown 和索引；未配置 API 时生成包含完整栏目结构的待处理模板。
+
+配置以下 GitHub Actions Secrets 后，论文收集完成会自动调用外部 LLM：
+
+- `LLM_API_URL`：兼容 Chat Completions 的 API 地址
+- `LLM_API_KEY`：API 密钥
+- `LLM_MODEL`：模型名称
+
+仅处理开放获取全文或用户有权访问的全文；不绕过付费墙，也不将整篇受版权保护的译文公开发布。公开内容限于摘要翻译、分析和必要的短摘录，并应遵守来源平台、出版社及论文许可条款。
