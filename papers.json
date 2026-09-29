@@ -1,0 +1,19 @@
+[
+  {
+    "id": "demo-1",
+    "title": "Aesthetic Assessment of AI-Generated Images: A Human-Centered Benchmark",
+    "authors": ["L. Chen", "M. Garcia"],
+    "year": 2025,
+    "abstract": "示例记录：面向生成图像的多维美学评价框架。部署自动收集后将由论文 API 数据替换或补充。",
+    "venue": "CHI 2025",
+    "publicationType": "conference",
+    "discoverySource": "demo",
+    "originalSource": "待核验",
+    "sourceLevel": "待核验",
+    "doi": "",
+    "url": "",
+    "tags": ["生成模型", "视觉美学"],
+    "score": 98,
+    "saved": true
+  }
+]
