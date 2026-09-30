@@ -1,13 +1,13 @@
 [
   {
-    "id": "https://openalex.org/W2157899060",
+    "id": "https://doi.org/10.1146/annurev-psych-120710-100504",
     "title": "Visual Aesthetics and Human Preference",
     "authors": [
-      "Stephen E Palmer",
+      "Stephen E. Palmer",
       "Karen B. Schloss",
       "Jonathan Sammartino"
     ],
-    "year": 2011,
+    "year": 2013,
     "abstract": "Human aesthetic preference in the visual domain is reviewed from definitional, methodological, empirical, and theoretical perspectives. Aesthetic science is distinguished from the perception of art and from philosophical treatments of aesthetics. The strengths and weaknesses of important behavioral techniques are presented and discussed, including two-alternative forced-choice, rank order, subjective rating, production/adjustment, indirect, and other tasks. Major findings are reviewed about preferences for colors (single colors, color combinations, and color harmony), spatial structure (low-level spatial properties, shape properties, and spatial composition within a frame), and individual differences in both color and spatial structure. Major theoretical accounts of aesthetic response are outlined and evaluated, including explanations in terms of mere exposure effects, arousal dynamics, categorical prototypes, ecological factors, perceptual and conceptual fluency, and the interaction of multiple components. The results of the review support the conclusion that aesthetic response can be studied rigorously and meaningfully within the framework of scientific psychology.",
     "abstractStatus": "已有摘要",
     "openAccess": {
@@ -20,8 +20,8 @@
     "landingPageUrl": "https://doi.org/10.1146/annurev-psych-120710-100504",
     "pdfUrl": "",
     "venue": "Annual Review of Psychology",
-    "publicationType": "other",
-    "discoverySource": "OpenAlex",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
     "originalSource": "OpenAlex/Crossref API",
     "sourceLevel": "A",
     "doi": "https://doi.org/10.1146/annurev-psych-120710-100504",
@@ -33,7 +33,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-09-29T14:54:48.728385+00:00"
+    "collectedAt": "2026-09-30T06:17:05.294455+00:00"
   },
   {
     "id": "https://openalex.org/W1971604583",
@@ -104,5 +104,726 @@
     "score": 0,
     "saved": false,
     "collectedAt": "2026-09-29T14:54:48.728439+00:00"
+  },
+  {
+    "id": "https://doi.org/10.2307/3331398",
+    "title": "Visual Aesthetics and Human Behavior",
+    "authors": [
+      "G. V. Trieschmann"
+    ],
+    "year": 1972,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Journal of Aesthetic Education",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.2307/3331398",
+    "publisherUrl": "https://doi.org/10.2307/3331398",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.2307/3331398",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294099+00:00"
+  },
+  {
+    "id": "https://doi.org/10.2307/1320057",
+    "title": "Experimental Aesthetics: Visual Aesthetic Preference in Five Cultures",
+    "authors": [
+      "Frank H. Farley",
+      "Sun-Hye Ahn"
+    ],
+    "year": 1973,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Studies in Art Education",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.2307/1320057",
+    "publisherUrl": "https://doi.org/10.2307/1320057",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.2307/1320057",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294127+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1023/b:axio.0000007184.98668.bc",
+    "title": "The Relationship Between Visual Illusion and Aesthetic Preference – an Attempt to Unify Experimental Phenomenology and Empirical Aesthetics",
+    "authors": [
+      "Kaoru Noguchi"
+    ],
+    "year": 2003,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Axiomathes",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1023/b:axio.0000007184.98668.bc",
+    "publisherUrl": "https://doi.org/10.1023/b:axio.0000007184.98668.bc",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1023/b:axio.0000007184.98668.bc",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294146+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1080/00393541.1973.11651318",
+    "title": "Experimental Aesthetics: Visual Aesthetic Preference in Five Cultures",
+    "authors": [
+      "Frank H. Farley",
+      "Sun-Hye Ahn"
+    ],
+    "year": 1973,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Studies in Art Education",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1080/00393541.1973.11651318",
+    "publisherUrl": "https://doi.org/10.1080/00393541.1973.11651318",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1080/00393541.1973.11651318",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294156+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1093/bjaesthetics/27.1.76",
+    "title": "SOME STUDIES OF AESTHETIC PREFERENCE",
+    "authors": [
+      "Harold J. McWhinnie"
+    ],
+    "year": 1987,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "The British Journal of Aesthetics",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1093/bjaesthetics/27.1.76",
+    "publisherUrl": "https://doi.org/10.1093/bjaesthetics/27.1.76",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1093/bjaesthetics/27.1.76",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294163+00:00"
+  },
+  {
+    "id": "https://doi.org/10.2307/3331372",
+    "title": "Visual Aesthetics and Learning",
+    "authors": [
+      "Pavel Machotka"
+    ],
+    "year": 1970,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Journal of Aesthetic Education",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.2307/3331372",
+    "publisherUrl": "https://doi.org/10.2307/3331372",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.2307/3331372",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294170+00:00"
+  },
+  {
+    "id": "https://doi.org/10.4324/9781003646839-8",
+    "title": "Children's aesthetic judgments",
+    "authors": [
+      "R. W. Pickford"
+    ],
+    "year": 2025,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Psychology and Visual Aesthetics",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.4324/9781003646839-8",
+    "publisherUrl": "https://doi.org/10.4324/9781003646839-8",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.4324/9781003646839-8",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294179+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1037/aca0000241",
+    "title": "Two routes to aesthetic preference, one route to aesthetic inference.",
+    "authors": [
+      "Chantal A. Miller",
+      "Ronald Hübner"
+    ],
+    "year": 2020,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Psychology of Aesthetics, Creativity, and the Arts",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1037/aca0000241",
+    "publisherUrl": "https://doi.org/10.1037/aca0000241",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1037/aca0000241",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294189+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1093/acprof:oso/9780199670000.003.0010",
+    "title": "Beautiful embodiment: The shaping of aesthetic preference by personal experience",
+    "authors": [
+      "Emily S. Cross"
+    ],
+    "year": 2015,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Art, Aesthetics, and the Brain",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1093/acprof:oso/9780199670000.003.0010",
+    "publisherUrl": "https://doi.org/10.1093/acprof:oso/9780199670000.003.0010",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1093/acprof:oso/9780199670000.003.0010",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294198+00:00"
+  },
+  {
+    "id": "https://doi.org/10.4324/9781003646839-9",
+    "title": "Personality and aesthetic preferences",
+    "authors": [
+      "R. W. Pickford"
+    ],
+    "year": 2025,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Psychology and Visual Aesthetics",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.4324/9781003646839-9",
+    "publisherUrl": "https://doi.org/10.4324/9781003646839-9",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.4324/9781003646839-9",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294207+00:00"
+  },
+  {
+    "id": "https://doi.org/10.4324/9781315224084-4",
+    "title": "The Mere Exposure Effect and Aesthetic Preference",
+    "authors": [
+      "James E. Cutting"
+    ],
+    "year": 2020,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "New Directions in Aesthetics, Creativity, and the Arts",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.4324/9781315224084-4",
+    "publisherUrl": "https://doi.org/10.4324/9781315224084-4",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.4324/9781315224084-4",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294215+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1163/9789004451230_008",
+    "title": "Aesthetic Preference and Empirical Research: Epistemology",
+    "authors": [
+      "Wilfried Van Damme"
+    ],
+    "year": 1996,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Beauty in Context",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1163/9789004451230_008",
+    "publisherUrl": "https://doi.org/10.1163/9789004451230_008",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1163/9789004451230_008",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294221+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1163/9789004451230_009",
+    "title": "Aesthetic Preference and Empirical Research: Methodology",
+    "authors": [
+      "Wilfried Van Damme"
+    ],
+    "year": 1996,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Beauty in Context",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1163/9789004451230_009",
+    "publisherUrl": "https://doi.org/10.1163/9789004451230_009",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1163/9789004451230_009",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294228+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1079/9780851995007.0015",
+    "title": "Aesthetic preference and ecological sustainability.",
+    "authors": [
+      "T. C. Daniel"
+    ],
+    "year": 2000,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Forests and landscapes: linking ecology, sustainability and aesthetics",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1079/9780851995007.0015",
+    "publisherUrl": "https://doi.org/10.1079/9780851995007.0015",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1079/9780851995007.0015",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294235+00:00"
+  },
+  {
+    "id": "https://doi.org/10.54941/ahfe1006777",
+    "title": "Visual Complexity and Aesthetic Value in Design: Between Hedonomics, Emotional Experience, and Ergonomic Aesthetics",
+    "authors": [
+      "Maria Moga"
+    ],
+    "year": 2025,
+    "abstract": "This article proposes a methodology for analyzing morphological load in the design of seating objects, with a focus on the relationship between aesthetics and functionality. Drawing on recent theoretical concepts such as embodied aesthetics and affective ergonomics, a semi-quantitative evaluation grid is developed to quantify the degree of formal elaboration of a chair based on six key criteria: complexity, functional justification, expressiveness, adaptability, sensory interaction, and affective function. The grid is applied to eight iconic chairs from modern and postmodern design, resulting in a tripartite typology: chairs with predominantly functional load, predominantly aesthetic load, and balanced load. Through comparative analysis and graphical representation of these models, the decisive role of morphology in communicating the aesthetic and ergonomic values of the product is highlighted. The article contributes to the development of an evaluation method applicable in design research, education, and professional practice.",
+    "abstractStatus": "已有摘要",
+    "venue": "AHFE International",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.54941/ahfe1006777",
+    "publisherUrl": "https://doi.org/10.54941/ahfe1006777",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.54941/ahfe1006777",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294276+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1037/aca0000449.supp",
+    "title": "Supplemental Material for Development and Validation of the Aesthetic Processing Preference Scale (APPS)",
+    "authors": [],
+    "year": 2021,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Psychology of Aesthetics, Creativity, and the Arts",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1037/aca0000449.supp",
+    "publisherUrl": "https://doi.org/10.1037/aca0000449.supp",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1037/aca0000449.supp",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294285+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1017/cbo9780511571213.033",
+    "title": "Aesthetic preference for rural landscapes: some resident and visitor differences",
+    "authors": [
+      "Brian Orland"
+    ],
+    "year": 1988,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Environmental Aesthetics",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1017/cbo9780511571213.033",
+    "publisherUrl": "https://doi.org/10.1017/cbo9780511571213.033",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1017/cbo9780511571213.033",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294293+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1016/j.ijhcs.2022.102978",
+    "title": "Aesthetic semantics: Affect rating of atomic visual web aesthetics for use in affective user experience design",
+    "authors": [
+      "Labake Odushegun"
+    ],
+    "year": 2023,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "International Journal of Human-Computer Studies",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1016/j.ijhcs.2022.102978",
+    "publisherUrl": "https://doi.org/10.1016/j.ijhcs.2022.102978",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1016/j.ijhcs.2022.102978",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294302+00:00"
+  },
+  {
+    "id": "https://doi.org/10.7765/9781526132567.00007",
+    "title": "Part I: What is evaluative aesthetics?",
+    "authors": [
+      "Andrew Klevan"
+    ],
+    "year": 2018,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Aesthetic evaluation and film",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.7765/9781526132567.00007",
+    "publisherUrl": "https://doi.org/10.7765/9781526132567.00007",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.7765/9781526132567.00007",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294308+00:00"
+  },
+  {
+    "id": "https://doi.org/10.7146/nja.v23i43.7499",
+    "title": "Grounding Aesthetic Preference in the Bodily Conditions of Meaning Constitution",
+    "authors": [
+      "Alfonsina Scarinzi"
+    ],
+    "year": 2012,
+    "abstract": "Mark Johnson’s work The Meaning of the Body presents John Dewey’s pragmatism and pragmatist aesthetics as the forerunners of the anti-Cartesian embodied enactive approach to human experience and meaning. He rejects the Kantian noncognitive character of aesthetics and emphasizes that aesthetics is the study of the human capacity to experience the bodily conditions of meaning constitution that grows from our bodily conditions of life. Using Mark Johnson’s view as a starting-point, this paper offers the beginning of an enactive approach to aesthetic preference contributing to bringing human aesthetic behavior research closer to the enactive approach to human experience. Following enactive studies on bodily sense-making and embodied emotions, I identify the bodily conditions of meaning constitution in which aesthetic preference is grounded with the subject’s self-regulatory visceral embodied constitution of viable degrees of value of the environmental factors according to her bodily structure. Unlike mainstream aesthetic preference research in empirical aesthetics, I claim that the subject’s aesthetic preference constitution requires the lived experience of the bodily conditions of meaning constitution through the conscious experience of the subjectively aroused lived body. The implausibility of the mind/body dichotomy of current aesthetic preference research is highlighted.",
+    "abstractStatus": "已有摘要",
+    "venue": "The Nordic Journal of Aesthetics",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.7146/nja.v23i43.7499",
+    "publisherUrl": "https://doi.org/10.7146/nja.v23i43.7499",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.7146/nja.v23i43.7499",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294359+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1093/bjaesthetics/1.3.144",
+    "title": "AUTHENTICITY AND AESTHETIC VALUE IN THE VISUAL ARTS",
+    "authors": [
+      "William Bossart"
+    ],
+    "year": 1961,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "The British Journal of Aesthetics",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1093/bjaesthetics/1.3.144",
+    "publisherUrl": "https://doi.org/10.1093/bjaesthetics/1.3.144",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1093/bjaesthetics/1.3.144",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294395+00:00"
+  },
+  {
+    "id": "https://doi.org/10.3154/jvs.34.20",
+    "title": "Visual Illusions and beauty in Perceptual Psychology",
+    "authors": [
+      "Daisuke YOSHINO"
+    ],
+    "year": 2014,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Journal of the Visualization Society of Japan",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.3154/jvs.34.20",
+    "publisherUrl": "https://doi.org/10.3154/jvs.34.20",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.3154/jvs.34.20",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294404+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1093/acprof:oso/9780199732142.003.0058",
+    "title": "Human Emotions and Aesthetic ExperienceAn overview of empirical aesthetics",
+    "authors": [
+      "Paul J. Silvia"
+    ],
+    "year": 2011,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Aesthetic ScienceConnecting Minds, Brains, and Experience",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1093/acprof:oso/9780199732142.003.0058",
+    "publisherUrl": "https://doi.org/10.1093/acprof:oso/9780199732142.003.0058",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1093/acprof:oso/9780199732142.003.0058",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294412+00:00"
+  },
+  {
+    "id": "https://doi.org/10.5040/9781350006935.ch-003",
+    "title": "Aesthetic Properties and Evaluation",
+    "authors": [],
+    "year": 2017,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Introducing Aesthetics and the Philosophy of Art",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.5040/9781350006935.ch-003",
+    "publisherUrl": "https://doi.org/10.5040/9781350006935.ch-003",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.5040/9781350006935.ch-003",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294418+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1515/9783110330618.63",
+    "title": "Visual Space as Aesthetic Problem",
+    "authors": [
+      "Jesús Padilla Gálvez"
+    ],
+    "year": 2012,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Wittgenstein and Aesthetics",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1515/9783110330618.63",
+    "publisherUrl": "https://doi.org/10.1515/9783110330618.63",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1515/9783110330618.63",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294463+00:00"
+  },
+  {
+    "id": "https://doi.org/10.1093/bjaesthetics/7.4.358",
+    "title": "EVALUATION AND AESTHETIC APPRAISALS",
+    "authors": [
+      "T. J. Diffey"
+    ],
+    "year": 1967,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "The British Journal of Aesthetics",
+    "publicationType": "journal",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.1093/bjaesthetics/7.4.358",
+    "publisherUrl": "https://doi.org/10.1093/bjaesthetics/7.4.358",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.1093/bjaesthetics/7.4.358",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294474+00:00"
+  },
+  {
+    "id": "https://doi.org/10.21203/rs.3.rs-3931389/v1",
+    "title": "Cognitive Capacity and Aesthetics: The Influence of Visual Working Memory on Landscape Ink Painting Preference",
+    "authors": [
+      "Dingning Long",
+      "Rongrong Chen"
+    ],
+    "year": 2024,
+    "abstract": "Abstract The appreciation of art is not solely influenced by the inherent qualities of a work, such as image complexity, but also by external factors related to the observer, such as their visual working memory capacity, which allows for the real-time storage and manipulation of visual information. In this study, we sought to examine the predictive role of both intrinsic and extrinsic factors in aesthetic appreciation of landscape ink paintings. To assess the visual working memory capacity, we utilized the Visual-Object Working Memory task which required participants to sequentially encode, maintain, and determine whether the current visual pattern matched the one presented two trials ago. Following this, participants were presented with pairs of twenty landscape ink paintings and asked to indicate either their preference or perceived complexity for one painting over the other. Additionally, participants rated their aesthetic preference and perceived level of complexity for each painting on 6-point Likert scales. While our sample did not exhibit a bias towards complexity in their evaluation of paintings, we did discover that individuals with a greater visual working memory capacity tend to favor ink paintings with higher image entropy. These results align with the Processing Fluency Theory, suggesting that individuals typically have a more positive reaction to stimuli that are readily and smoothly processed. This research may have implications for the customization of art recommendation algorithms that take into account individual cognitive traits.",
+    "abstractStatus": "已有摘要",
+    "venue": "未标注 venue",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.21203/rs.3.rs-3931389/v1",
+    "publisherUrl": "https://doi.org/10.21203/rs.3.rs-3931389/v1",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.21203/rs.3.rs-3931389/v1",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294521+00:00"
+  },
+  {
+    "id": "https://doi.org/10.5040/9781350989009.ch-002",
+    "title": "An Aesthetic Revolution: From Trance To Meaning–A Metamorphosis of Islamic Aesthetics",
+    "authors": [],
+    "year": 2015,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "The Origins of Visual Culture in the Islamic World",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.5040/9781350989009.ch-002",
+    "publisherUrl": "https://doi.org/10.5040/9781350989009.ch-002",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.5040/9781350989009.ch-002",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294532+00:00"
+  },
+  {
+    "id": "https://doi.org/10.5040/9781350251809.ch-005",
+    "title": "Skin, Aesthetics, Incarnation: Deleuze’s Diagram of Francis Bacon – An Epilogue",
+    "authors": [],
+    "year": 2012,
+    "abstract": "",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "venue": "Deleuze and the Diagram",
+    "publicationType": "other",
+    "discoverySource": "Crossref",
+    "originalSource": "OpenAlex/Crossref API",
+    "sourceLevel": "A",
+    "doi": "https://doi.org/10.5040/9781350251809.ch-005",
+    "publisherUrl": "https://doi.org/10.5040/9781350251809.ch-005",
+    "openAccessUrl": "",
+    "url": "https://doi.org/10.5040/9781350251809.ch-005",
+    "tags": [
+      "视觉美学"
+    ],
+    "score": 0,
+    "saved": false,
+    "collectedAt": "2026-09-30T06:17:05.294540+00:00"
   }
 ]
