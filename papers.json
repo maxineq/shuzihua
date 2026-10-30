@@ -33,7 +33,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244837+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779290+00:00"
   },
   {
     "id": "https://openalex.org/W1971604583",
@@ -128,7 +128,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244471+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778488+00:00"
   },
   {
     "id": "https://doi.org/10.2307/1320057",
@@ -154,7 +154,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244498+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778528+00:00"
   },
   {
     "id": "https://doi.org/10.1023/b:axio.0000007184.98668.bc",
@@ -179,7 +179,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244515+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778559+00:00"
   },
   {
     "id": "https://doi.org/10.1080/00393541.1973.11651318",
@@ -205,7 +205,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244525+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778581+00:00"
   },
   {
     "id": "https://doi.org/10.1093/bjaesthetics/27.1.76",
@@ -230,7 +230,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244533+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778598+00:00"
   },
   {
     "id": "https://doi.org/10.2307/3331372",
@@ -255,7 +255,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244550+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778700+00:00"
   },
   {
     "id": "https://doi.org/10.4324/9781003646839-8",
@@ -280,7 +280,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244557+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778684+00:00"
   },
   {
     "id": "https://doi.org/10.1037/aca0000241",
@@ -291,7 +291,7 @@
     ],
     "year": 2020,
     "abstract": "Aesthetic preferences vary strongly between people. Yet, it can be essential to infer what other people aesthetically prefer. Therefore, we investigated lay people’s ability to infer aesthetic preferences and the involved processes. Because aesthetic preference depends on affective as well as cognitive processes, we asked 40 participants to rate 24 artworks on the dimensions Positive Attraction, Cognitive Stimulation, and Emotionality. Additionally, participants had to infer other people’s judgments concerning the same stimuli and dimensions. In the self-assessment, Positive Attraction correlated strongly with Emotionality as well as with Cognitive Stimulation, whereas in the other-assessment, Positive Attraction correlated only with Emotionality. An interassessment correlation revealed that about half of the participants produced a significant medium to high correlation between their other assessments and the mean others = self-assessment, depending on the respective dimension. Thus, our results indicate that many individuals are able to infer aesthetic preferences, and that preferences for artworks are inferred primarily via affective stimulus appraisal.",
-    "abstractStatus": "Semantic Scholar 回填",
+    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
     "venue": "Psychology of Aesthetics, Creativity, and the Arts",
     "publicationType": "journal",
     "discoverySource": "Crossref",
@@ -306,7 +306,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244575+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778724+00:00"
   },
   {
     "id": "https://doi.org/10.1093/acprof:oso/9780199670000.003.0010",
@@ -331,7 +331,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244565+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778749+00:00"
   },
   {
     "id": "https://doi.org/10.4324/9781003646839-9",
@@ -341,7 +341,7 @@
     ],
     "year": 2025,
     "abstract": "Introduction: A clear relationship exists between human personality and architectural preferences. However, reviewing the findings of previous studies reveals that this expectation is not necessarily accurate, as contradictory results have been reported. This study aims to review various research and assessment methods used in previous studies for assessing the relationship between personality and architectural preferences and identify the theoretical and practical shortcomings of each method. Methods: This is a critical review study. A search was conducted in Google Scholar and Web of Science database for published articles in English using the following keywords: “Visual aesthetics,” “personality traits,” “architectural preferences,” “art preferences,” and “aesthetic judgments.” These articles were first categorized into four groups based on their methodological approaches (physiological, neurobiological, practical, and psychological) and then their degree of success and generalizability were assessed briefly. Finally, due to having lower implementation limitations and a higher theoretical background, the group using the psychological approaches was structurally analyzed from the methodological and practical aspects to develop a conceptual quadruple model. After presenting the model, neural network modeling was used to discover of hidden patterns. Results: Based on the analysis of the reviewed studies, the psychological approach was a more feasible option for assessing the relationship between personality and architectural preferences. The quadruple model that proposed for this purpose included aesthetic variables/environmental stimuli, context, personality traits, and responses. The machine learning method facilitated the discovery of hidden patterns in relationship between personality and human preferences. Conclusion: This study proposes a new systematic quadruple model for evaluating aesthetic preferences.",
-    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "abstractStatus": "Semantic Scholar 回填",
     "venue": "Psychology and Visual Aesthetics",
     "publicationType": "other",
     "discoverySource": "Crossref",
@@ -356,7 +356,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244587+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778768+00:00"
   },
   {
     "id": "https://doi.org/10.4324/9781315224084-4",
@@ -381,7 +381,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244596+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778787+00:00"
   },
   {
     "id": "https://doi.org/10.1163/9789004451230_008",
@@ -406,7 +406,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244609+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778819+00:00"
   },
   {
     "id": "https://doi.org/10.1163/9789004451230_009",
@@ -431,7 +431,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244603+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778803+00:00"
   },
   {
     "id": "https://doi.org/10.1079/9780851995007.0015",
@@ -456,7 +456,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244625+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778856+00:00"
   },
   {
     "id": "https://doi.org/10.54941/ahfe1006777",
@@ -481,7 +481,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244672+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778960+00:00"
   },
   {
     "id": "https://doi.org/10.1037/aca0000449.supp",
@@ -504,7 +504,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244617+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778838+00:00"
   },
   {
     "id": "https://doi.org/10.1017/cbo9780511571213.033",
@@ -529,7 +529,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244632+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778873+00:00"
   },
   {
     "id": "https://doi.org/10.1016/j.ijhcs.2022.102978",
@@ -554,7 +554,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244681+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778983+00:00"
   },
   {
     "id": "https://doi.org/10.7765/9781526132567.00007",
@@ -579,7 +579,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244688+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779133+00:00"
   },
   {
     "id": "https://doi.org/10.7146/nja.v23i43.7499",
@@ -604,7 +604,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244749+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779113+00:00"
   },
   {
     "id": "https://doi.org/10.1093/bjaesthetics/1.3.144",
@@ -629,7 +629,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244758+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779150+00:00"
   },
   {
     "id": "https://doi.org/10.3154/jvs.34.20",
@@ -654,7 +654,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244767+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779170+00:00"
   },
   {
     "id": "https://doi.org/10.1093/acprof:oso/9780199732142.003.0058",
@@ -679,7 +679,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244776+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779188+00:00"
   },
   {
     "id": "https://doi.org/10.5040/9781350006935.ch-003",
@@ -702,7 +702,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244782+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779203+00:00"
   },
   {
     "id": "https://doi.org/10.1515/9783110330618.63",
@@ -727,7 +727,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244845+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779307+00:00"
   },
   {
     "id": "https://doi.org/10.1093/bjaesthetics/7.4.358",
@@ -752,7 +752,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244852+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779324+00:00"
   },
   {
     "id": "https://doi.org/10.21203/rs.3.rs-3931389/v1",
@@ -801,7 +801,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244861+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779344+00:00"
   },
   {
     "id": "https://doi.org/10.5040/9781350251809.ch-005",
@@ -849,7 +849,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244868+00:00"
+    "collectedAt": "2026-10-30T06:47:23.779360+00:00"
   },
   {
     "id": "https://doi.org/10.38007/978-1-80053-488-9",
@@ -872,6 +872,6 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-10-29T06:44:50.244542+00:00"
+    "collectedAt": "2026-10-30T06:47:23.778665+00:00"
   }
 ]
