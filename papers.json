@@ -33,7 +33,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006343+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637358+00:00"
   },
   {
     "id": "https://openalex.org/W1971604583",
@@ -128,7 +128,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005847+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637008+00:00"
   },
   {
     "id": "https://doi.org/10.2307/1320057",
@@ -154,7 +154,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005881+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637042+00:00"
   },
   {
     "id": "https://doi.org/10.1023/b:axio.0000007184.98668.bc",
@@ -179,7 +179,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005906+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637059+00:00"
   },
   {
     "id": "https://doi.org/10.1080/00393541.1973.11651318",
@@ -205,7 +205,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005922+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637069+00:00"
   },
   {
     "id": "https://doi.org/10.1093/bjaesthetics/27.1.76",
@@ -230,7 +230,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005936+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637076+00:00"
   },
   {
     "id": "https://doi.org/10.2307/3331372",
@@ -240,7 +240,7 @@
     ],
     "year": 1970,
     "abstract": "Urban parks are an important component of public urban spaces, which directly impact the living experiences of residents and the urban image. High-quality urban parks are crucial for enhancing the well-being of residents. This study selected Fukuoka, Japan, as the study site. Five urban parks were chosen to evaluate landscape visual quality by using the Scenic Beauty Estimation (SBE) method. The Semantic Differential (SD) method was used to get sample subjective landscape features. Meanwhile, sample objective landscape features were obtained by using semantic segmentation techniques in deep learning and combined with spatial analysis to understand their distribution. A regression model was established, which used the SBE values as the dependent variable and subjective landscape features as the independent variables to analyze the relationship between urban park landscape visual quality and subjective landscape features. The regression analysis revealed that sense of layering, harmony, interestingness, sense of order, and vitality were the core factors influencing visual quality. All five features had a significant positive impact on landscape visual quality. The sense of order was the most influential factor, which would be the key to enhancing the landscape perception experience. Moreover, the XGBoost model and SHAP value from machine learning were used to reveal the nonlinear relationships and significant threshold effects between urban park visual quality and five objective landscape features: openness, greenness, enclosure, vegetation diversity, and Shannon–Wiener diversity index. This study showed that when openness exceeded 0.27, the positive effect was significant. The optimal threshold for the greenness was 0.38. Vegetation diversity and enclosure had to be below 0.82 and 0.58, respectively, to have a positive impact. Meanwhile, the positive influence of the Shannon–Wiener diversity index reached its maximum at a value of 1.37. This study not only establishes a systematic method for diagnosing landscape problems and evaluating landscape visual quality but also provides both theoretical support and practical guidance for urban park landscape optimization.",
-    "abstractStatus": "Crossref 无摘要，待 Semantic Scholar 回填",
+    "abstractStatus": "Semantic Scholar 回填",
     "venue": "Journal of Aesthetic Education",
     "publicationType": "journal",
     "discoverySource": "Crossref",
@@ -255,7 +255,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005974+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637099+00:00"
   },
   {
     "id": "https://doi.org/10.4324/9781003646839-8",
@@ -280,7 +280,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005963+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637092+00:00"
   },
   {
     "id": "https://doi.org/10.1037/aca0000241",
@@ -306,7 +306,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006008+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637119+00:00"
   },
   {
     "id": "https://doi.org/10.1093/acprof:oso/9780199670000.003.0010",
@@ -331,7 +331,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005987+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637107+00:00"
   },
   {
     "id": "https://doi.org/10.4324/9781003646839-9",
@@ -356,7 +356,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006023+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637129+00:00"
   },
   {
     "id": "https://doi.org/10.4324/9781315224084-4",
@@ -381,7 +381,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006040+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637138+00:00"
   },
   {
     "id": "https://doi.org/10.1163/9789004451230_008",
@@ -406,7 +406,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006055+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637147+00:00"
   },
   {
     "id": "https://doi.org/10.1163/9789004451230_009",
@@ -431,7 +431,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006067+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637154+00:00"
   },
   {
     "id": "https://doi.org/10.1079/9780851995007.0015",
@@ -456,7 +456,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006152+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637169+00:00"
   },
   {
     "id": "https://doi.org/10.54941/ahfe1006777",
@@ -481,7 +481,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006141+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637207+00:00"
   },
   {
     "id": "https://doi.org/10.1037/aca0000449.supp",
@@ -504,7 +504,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006080+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637162+00:00"
   },
   {
     "id": "https://doi.org/10.1017/cbo9780511571213.033",
@@ -529,7 +529,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006090+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637216+00:00"
   },
   {
     "id": "https://doi.org/10.1016/j.ijhcs.2022.102978",
@@ -554,7 +554,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006165+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637225+00:00"
   },
   {
     "id": "https://doi.org/10.7765/9781526132567.00007",
@@ -579,7 +579,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006248+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637289+00:00"
   },
   {
     "id": "https://doi.org/10.7146/nja.v23i43.7499",
@@ -604,7 +604,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006233+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637277+00:00"
   },
   {
     "id": "https://doi.org/10.1093/bjaesthetics/1.3.144",
@@ -629,7 +629,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006258+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637296+00:00"
   },
   {
     "id": "https://doi.org/10.3154/jvs.34.20",
@@ -654,7 +654,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006272+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637306+00:00"
   },
   {
     "id": "https://doi.org/10.1093/acprof:oso/9780199732142.003.0058",
@@ -679,7 +679,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006285+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637320+00:00"
   },
   {
     "id": "https://doi.org/10.5040/9781350006935.ch-003",
@@ -702,7 +702,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006293+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637312+00:00"
   },
   {
     "id": "https://doi.org/10.1515/9783110330618.63",
@@ -727,7 +727,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006353+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637366+00:00"
   },
   {
     "id": "https://doi.org/10.1093/bjaesthetics/7.4.358",
@@ -752,7 +752,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006362+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637372+00:00"
   },
   {
     "id": "https://doi.org/10.21203/rs.3.rs-3931389/v1",
@@ -801,7 +801,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006374+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637381+00:00"
   },
   {
     "id": "https://doi.org/10.5040/9781350251809.ch-005",
@@ -849,7 +849,7 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.006384+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637388+00:00"
   },
   {
     "id": "https://doi.org/10.38007/978-1-80053-488-9",
@@ -872,6 +872,6 @@
     ],
     "score": 0,
     "saved": false,
-    "collectedAt": "2026-11-03T07:32:33.005950+00:00"
+    "collectedAt": "2026-11-04T07:14:35.637084+00:00"
   }
 ]
